@@ -1,3 +1,12 @@
 import { filters } from "./filters"
+import { BlockerV1 } from "./blocker_v1"
+import { Refused } from "./refused"
 
-console.log("Hello World")
+// Initialize a Refused class
+// And setting up its handlers
+const refused = new Refused()
+refused.filters = filters
+refused.blocker = BlockerV1
+
+// Start the Adblock
+refused.run()
