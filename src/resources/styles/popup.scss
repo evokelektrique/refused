@@ -1,0 +1,153 @@
+@import 'vazir-font/dist/font-face.css';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// Varables
+$wrapper-min-width: 321px;
+$wrapper_min_height: 393px;
+$text-color: #FFF;
+$primary-dark: #20222E;
+$secondary-dark: #BBB;
+// $target-color: #FF0000;
+
+$font-family: "Vazir";
+$font-size: 16px;
+
+$power-on-color: invert(100%) sepia(100%) saturate(0%) hue-rotate(238deg) brightness(101%) contrast(102%);
+$power-on-gradient: linear-gradient(#fec989 0%, #ffa45c 100%);
+$power-off-color: invert(0%) sepia(0%) saturate(0%) hue-rotate(72deg) brightness(102%) contrast(104%);
+
+body {
+  background: $primary-dark;
+  color: $text-color;
+  font-family: $font-family;
+  min-width: $wrapper-min-width;
+  min-height: $wrapper-min-height;
+  font-size: $font-size;
+}
+
+header {
+  margin: 25px 20px 30px 20px;
+
+  #logo {
+    background: url(../images/extension-logo.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 56px;
+    height: 48px;
+  }
+}
+
+.contents {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  #power_button {
+    position: relative;
+    z-index: 2;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: white;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: all .3s ease;
+
+    &:before {
+      transition: all .3s ease;
+
+      content: "";
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      z-index: 1;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.1
+    }
+
+    &:after {
+      transition: all .3s ease;
+
+      content: "";
+      background: url(../images/power.svg);
+      left: 0; 
+      right: 0; 
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: auto; 
+      margin-right: auto; 
+      // Use filter to change power icon color
+      filter: $power-off-color;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+    }
+
+    &.power_on {
+      &, &:before {
+        background: $power-on-gradient;
+      }
+
+      &:after {
+        filter: $power-on-color
+      }
+    }
+  }
+
+
+  #details {
+    margin-bottom: 40px;
+    text-align: center;
+
+    h2 {
+      margin: 0;
+      margin-bottom: 0px;
+      font-weight: normal;
+      font-size: 20px;
+    }
+
+    h5 {
+      margin: 0;
+      font-weight: lighter;
+      font-size: 14px;
+      color: $secondary-dark;
+    }
+  }
+
+  #block_information {
+    width: 100%;
+    padding: 0 20px;
+    transition: all .3s ease;
+    opacity: 0;
+
+    &.visible {
+      opacity: 1;
+    }
+
+    p {
+      padding-bottom: 10px;
+      font-size: 14px;
+      color: $secondary-dark;
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        color: #ff8c84;
+      }
+    }
+  }
+}
+
+
+

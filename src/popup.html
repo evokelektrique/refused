@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Popup ?!?</title>
+  <meta charset="utf-8">
+  <title>Popup ?!?</title>
+  <link rel="stylesheet" type="text/css" href="./popup.css">
 </head>
 <body>
-	<p>Hello World</p>
+  <!-- Header Logo -->
+  <header>
+    <div id="logo"></div>
+  </header>
+
+  <!-- Power Button / Details -->
+  <div class="contents">
+    <div id="power_button"></div>
+
+    <div id="details" class="disabled">
+      <!-- Current Tab URL -->
+      <h2>soundcloud.com</h2>
+      <!-- Notice -->
+      <h5 id="status"></h5>
+    </div>
+
+    <div id="block_information">
+      <p>Blocked Ads:<span>8</span></p>
+      <p>Total:<span>5,723</span></p>
+    </div>
+
+  </div>
+
+
+
+
+  <script src="./popup.js"></script>
 </body>
 </html>

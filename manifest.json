@@ -15,5 +15,6 @@
   "options_ui": {
     "page": "options.html"
   },
-  "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"]
+  "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"],
+  "default_locale": "en"
 }
