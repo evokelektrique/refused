@@ -13,4 +13,9 @@ mix.copy([
   "src/*.html",
 ], "build")
 
+mix.copy([
+  "src/resources/images/48.png",
+  "src/resources/images/96.png",
+], "build/images")
+
 mix.copyDirectory("_locales", "build/_locales/")

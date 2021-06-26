@@ -1,3 +1,5 @@
+const browser = require("webextension-polyfill");
+
 /**
  * Blocker version one based on manifest_version 2
  * @class
@@ -9,7 +11,7 @@ export class BlockerV1 {
    * @param  {array} filters
    */
   block_urls(filters) {
-    chrome.webRequest.onBeforeRequest.addListener(
+    browser.webRequest.onBeforeRequest.addListener(
       this.blocker_handler,
       {urls: filters},
       ["blocking"]

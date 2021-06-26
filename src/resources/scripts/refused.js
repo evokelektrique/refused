@@ -1,3 +1,5 @@
+const browser = require("webextension-polyfill");
+
 export class Refused {
   filters = []
   blocker = null
@@ -19,7 +21,7 @@ export class Refused {
     this.filters = filters
   }
 
-  run() {
+  start() {
     if(!this.blocker) {
       throw new Error("Blocker is not set up")
     }
@@ -31,6 +33,10 @@ export class Refused {
     // Initiate Blocker class
     // it will start blocking urls by its own handler
     const blocker = new this.blocker().block_urls(this.filters)
+  }
+
+  stop() {
+    browser.webRequest.onBeforeRequest.removeListener(new this.blocker().blocker_handler)
   }
 
 }
