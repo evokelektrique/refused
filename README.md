@@ -68,7 +68,7 @@ Currently waiting for Firefox add-on team to review the extension codes, but you
    npx mix
    ```
    Or you can add `--production` argument to minify the codes
-4. Load extension on Firefox by opening the `about:debugging` url and by clicking on the `Load Temporary Add-on` button and then select the `manifest.json` located in the `./build` folder"
+4. Load extension on Firefox by opening the `about:debugging` url and by clicking on the `Load Temporary Add-on` button and then select the `manifest.json` file located in the root of `./build` folder
   
 <!-- CONTACT -->
 ## Contact
