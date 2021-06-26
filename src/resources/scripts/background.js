@@ -3,15 +3,13 @@ import { BlockerV1 } from "./blocker_v1"
 import { Refused } from "./refused"
 const browser = require("webextension-polyfill");
 
-
 // On Install Handler
-function handle_install() {
+function install_listener() {
   browser.storage.local.set({
     status: false
   })
 }
-browser.runtime.onInstalled.addListener(handle_install)
-
+browser.runtime.onInstalled.addListener(install_listener)
 
 // Initialize a Refused class
 // And setting up its handlers
@@ -19,11 +17,7 @@ const refused = new Refused()
 refused.filters = filters
 refused.blocker = BlockerV1
 
-// Start the Adblock
-refused.start()
-
-
-// Open Port
+// Open communication port
 browser.runtime.onConnect.addListener(port => {
   port.onMessage.addListener(msg => {
   })
@@ -50,12 +44,3 @@ browser.runtime.onMessage.addListener( (request,sender,sendResponse) => {
 
   return true
 })
-
-
-
-
-
-
-
-
-

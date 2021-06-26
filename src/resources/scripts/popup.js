@@ -9,10 +9,10 @@ const browser = require("webextension-polyfill");
   const lang_status_on = chrome.i18n.getMessage("status_on")
   const lang_status_off = chrome.i18n.getMessage("status_off")
   const element_status = document.getElementById("status")
-  
 
   // Get power status and add class to it's element
   browser.storage.local.get("status").then(data => {
+    console.log(data)
     const status = data.status
     const power_element = document.getElementById("power_button")
     if(status) {
@@ -30,8 +30,7 @@ const browser = require("webextension-polyfill");
     }
   })
 
-
-
+  // Power Button Listener
   document.getElementById("power_button").addEventListener("click", (e) => {
     e.preventDefault()
     e.target.classList.toggle("power_on")
@@ -46,8 +45,4 @@ const browser = require("webextension-polyfill");
       console.log(response)
     })
   })
-
 })()
-
-
-

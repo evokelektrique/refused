@@ -18,4 +18,4 @@ mix.copy([
   "src/resources/images/96.png",
 ], "build/images")
 
-mix.copyDirectory("_locales", "build/_locales/")
+mix.copyDirectory("src/_locales", "build/_locales/")

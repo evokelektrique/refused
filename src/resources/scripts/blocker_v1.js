@@ -12,7 +12,7 @@ export class BlockerV1 {
    */
   block_urls(filters) {
     browser.webRequest.onBeforeRequest.addListener(
-      this.blocker_handler,
+      this.blocker_listener,
       {urls: filters},
       ["blocking"]
     );
@@ -22,7 +22,7 @@ export class BlockerV1 {
    * @param  {object} details
    * @return {object}         
    */
-  blocker_handler(details) {
+  blocker_listener(details) {
     console.log("blocking:", details.url);
     return {
       cancel: true

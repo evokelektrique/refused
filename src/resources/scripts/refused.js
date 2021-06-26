@@ -4,8 +4,7 @@ export class Refused {
   filters = []
   blocker = null
 
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * @param  {class} blocker 
@@ -21,6 +20,9 @@ export class Refused {
     this.filters = filters
   }
 
+  /**
+   * Starts blocking the ads
+   */
   start() {
     if(!this.blocker) {
       throw new Error("Blocker is not set up")
@@ -35,8 +37,11 @@ export class Refused {
     const blocker = new this.blocker().block_urls(this.filters)
   }
 
+  /**
+   * Stops blocking the ads, by removing its listener
+   */
   stop() {
-    browser.webRequest.onBeforeRequest.removeListener(new this.blocker().blocker_handler)
+    browser.webRequest.onBeforeRequest.removeListener(new this.blocker().blocker_listener)
   }
 
 }
