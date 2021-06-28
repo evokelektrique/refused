@@ -1,3 +1,5 @@
 exports.filters = [
-  "*://*.yektanet.com/*"
+  "*://*.yektanet.com/*",
+  "*://*.kaprila.com/*",
+  "*://*.mediaad.org/*"
 ]

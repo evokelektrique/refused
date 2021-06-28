@@ -25,7 +25,7 @@ fetch_total_blocks.then(fetch_stats_on_got)
 // On Install Handler
 function install_listener() {
   browser.storage.local.set({
-    status: true
+    status: false
   })
 }
 browser.runtime.onInstalled.addListener(install_listener)
