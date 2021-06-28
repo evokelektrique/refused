@@ -3,10 +3,29 @@ import { BlockerV1 } from "./blocker_v1"
 import { Refused } from "./refused"
 const browser = require("webextension-polyfill");
 
+// Fetch Stats
+function fetch_stats_on_got(data) {
+  if(Object.keys(data).length === 0) {
+    browser.storage.local.set({total_blocks: 0})
+  }
+
+  // Initialize Badge
+  browser.browserAction.setBadgeBackgroundColor({
+    color: "#f44336"
+  });
+  browser.browserAction.setBadgeText({
+    text: String(data.total_blocks)
+  });
+}
+
+const fetch_total_blocks = browser.storage.local.get("total_blocks")
+fetch_total_blocks.then(fetch_stats_on_got)
+
+
 // On Install Handler
 function install_listener() {
   browser.storage.local.set({
-    status: false
+    status: true
   })
 }
 browser.runtime.onInstalled.addListener(install_listener)
@@ -19,12 +38,12 @@ refused.blocker = BlockerV1
 
 // Open communication port
 browser.runtime.onConnect.addListener(port => {
-  port.onMessage.addListener(msg => {
-  })
-});
+  port.onMessage.addListener(msg => console.log(msg)) 
+})
 
 // Listener
-browser.runtime.onMessage.addListener( (request,sender,sendResponse) => {
+browser.runtime.onMessage.addListener( (request, sender, send_response) => {
+  console.log(request)
   if( request === "toggle_status" ) {
     browser.storage.local.get("status").then(data => {
       // Store new status received from `popup.js`
@@ -38,7 +57,7 @@ browser.runtime.onMessage.addListener( (request,sender,sendResponse) => {
         refused.start()
       }
 
-      sendResponse( { status: new_status} )
+      send_response( { status: new_status} )
     })
   }
 

@@ -23,9 +23,18 @@ export class BlockerV1 {
    * @return {object}         
    */
   blocker_listener(details) {
-    console.log("blocking:", details.url);
+    // console.log("blocking:", details.url);
+
+    browser.storage.local.get("total_blocks").then(data => {
+      const new_total = data.total_blocks + 1
+      browser.browserAction.setBadgeText({
+        text: String(new_total)
+      });
+      browser.storage.local.set({total_blocks: new_total})
+    })
+
     return {
       cancel: true
-    };
+    }
   }
 }

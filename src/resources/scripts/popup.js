@@ -6,8 +6,8 @@ const browser = require("webextension-polyfill");
   // Set up current tab url
   document.getElementById("current_tab_url").innerHTML = new URL(current_tab.url).host
 
-  const lang_status_on = chrome.i18n.getMessage("status_on")
-  const lang_status_off = chrome.i18n.getMessage("status_off")
+  const lang_status_on = browser.i18n.getMessage("status_on")
+  const lang_status_off = browser.i18n.getMessage("status_off")
   const element_status = document.getElementById("status")
 
   // Get power status and add class to it's element
@@ -31,7 +31,7 @@ const browser = require("webextension-polyfill");
   })
 
   // Power Button Listener
-  document.getElementById("power_button").addEventListener("click", (e) => {
+  document.getElementById("power_button").addEventListener("click", async e => {
     e.preventDefault()
     e.target.classList.toggle("power_on")
     document.getElementById("block_information").classList.toggle("visible")
@@ -41,8 +41,13 @@ const browser = require("webextension-polyfill");
       element_status.innerHTML = lang_status_on
     }
     
-    chrome.runtime.sendMessage("toggle_status", function(response) { 
-      console.log(response)
-    })
+    const sender = await browser.runtime.sendMessage("toggle_status")
+    console.log(sender)
+  })
+
+
+  browser.storage.local.get("total_blocks").then(data => {
+    document.getElementById("total_blocks").innerHTML = data.total_blocks
   })
 })()
+
