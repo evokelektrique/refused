@@ -40,7 +40,7 @@
 In this section, explanations are written in the following cases.
 
 ### Requirments
-- Firefox version >= 56
+- Firefox & Firefox Android >= 48
 - NodeJS (Only for testing and building from source code)
 
 ### Installation
