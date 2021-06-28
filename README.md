@@ -54,7 +54,10 @@ In this section, explanations are written in the following cases.
 - NodeJS (Only for testing and building from source code)
 
 ### Installation
-Currently waiting for Firefox add-on team to review the extension codes, but you can self install it your self by following instructions explained below
+- Chrome (Waiting to be reviewed)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/refused/)
+
+Or you can self install it your self by following instructions explained below
 1. Clone the repo
    ```sh
    git clone https://github.com/evokelektrique/refused.git
