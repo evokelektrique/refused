@@ -21,7 +21,6 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#built-with">Built With</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -29,19 +28,10 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#built-with">Built With</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
-
-
-### Built With
-In this section, A list of Libraries & Frameworks used in the construction of this project mentioned below.
-* [webextension-polyfill](https://github.com/mozilla/webextension-polyfill)
-* [laravel-mix](https://laravel-mix.com)
-* [sass-loader](https://www.npmjs.com/package/sass-loader)
-* [sass](https://www.npmjs.com/package/sass)
-* [resolve-url-loader](https://www.npmjs.com/package/resolve-url-loader)
-
 
 
 <!-- GETTING STARTED -->
@@ -72,6 +62,15 @@ Or you can self install it your self by following instructions explained below
    ```
    Or you can add `--production` argument to minify the codes
 4. Load extension on Firefox by opening the `about:debugging` url and by clicking on the `Load Temporary Add-on` button and then select the `manifest.json` file located in the root of `./build` folder
+
+### Built With
+In this section, A list of Libraries & Frameworks used in the construction of this project mentioned below.
+* [webextension-polyfill](https://github.com/mozilla/webextension-polyfill)
+* [laravel-mix](https://laravel-mix.com)
+* [sass-loader](https://www.npmjs.com/package/sass-loader)
+* [sass](https://www.npmjs.com/package/sass)
+* [resolve-url-loader](https://www.npmjs.com/package/resolve-url-loader)
+
   
 <!-- CONTACT -->
 ## Contact
