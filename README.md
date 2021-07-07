@@ -44,7 +44,7 @@ In this section, explanations are written in the following cases.
 - NodeJS (Only for testing and building from source code)
 
 ### Installation
-- Chrome (Waiting to be reviewed)
+- [Chrome](https://chrome.google.com/webstore/detail/refused/omeglkgaklnjheplmjmmcgodhcnjckdf)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/refused/)
 
 Or you can self install it your self by following instructions explained below
