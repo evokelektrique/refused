@@ -4,10 +4,14 @@ import { Refused } from "./refused"
 const browser = require("webextension-polyfill");
 
 // On Install Handler
-function install_listener() {
-  browser.storage.local.set({ status: true })
-  browser.storage.local.set({ total_blocks: "0" })
-  chrome.tabs.create({url:"https://refused.ir/update.html"})
+function install_listener(details) {
+  console.log(details)
+  if(details.reason === "install") {
+    browser.storage.local.set({ status: true })
+    browser.storage.local.set({ total_blocks: "0" })
+  } else {
+    chrome.tabs.create({url:"https://refused.ir/update.html"})
+  }
 }
 browser.runtime.onInstalled.addListener(install_listener)
 
