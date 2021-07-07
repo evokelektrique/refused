@@ -26,7 +26,7 @@ export class BlockerV1 {
     // console.log("blocking:", details.url);
 
     browser.storage.local.get("total_blocks").then(data => {
-      const new_total = data.total_blocks + 1
+      const new_total = parseInt(data.total_blocks) + 1
       browser.browserAction.setBadgeText({
         text: String(new_total)
       });
