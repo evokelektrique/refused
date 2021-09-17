@@ -1,4 +1,5 @@
 const browser = require("webextension-polyfill");
+import { Helper } from "./helper"
 
 /**
  * Blocker version one based on manifest_version 2
@@ -23,8 +24,7 @@ export class BlockerV1 {
    * @return {object}         
    */
   blocker_listener(details) {
-    // console.log("blocking:", details.url);
-
+    console.log(Helper.parse_url(details.url))
     browser.storage.local.get("total_blocks").then(data => {
       const new_total = parseInt(data.total_blocks) + 1
       browser.browserAction.setBadgeText({

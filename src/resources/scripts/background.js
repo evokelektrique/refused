@@ -1,16 +1,18 @@
 import { filters } from "./filters"
 import { BlockerV1 } from "./blocker_v1"
 import { Refused } from "./refused"
-const browser = require("webextension-polyfill");
+
+const browser  = require("webextension-polyfill");
+const BASE_URL = "https://refused.ir"
 
 // On Install Handler
 function install_listener(details) {
-  console.log(details)
+  // Detect if the extension is installed or updated
   if(details.reason === "install") {
     browser.storage.local.set({ status: true })
     browser.storage.local.set({ total_blocks: "0" })
   } else {
-    chrome.tabs.create({url:"https://refused.ir/update.html"})
+    chrome.tabs.create({url: BASE_URL + "/update.html"})
   }
 }
 browser.runtime.onInstalled.addListener(install_listener)

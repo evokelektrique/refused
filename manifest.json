@@ -16,6 +16,13 @@
   "options_ui": {
     "page": "options.html"
   },
-  "permissions": ["webRequest", "webRequestBlocking", "tabs", "storage", "<all_urls>"],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "<all_urls>"
+  ],
   "default_locale": "en"
 }

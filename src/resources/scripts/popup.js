@@ -12,7 +12,7 @@ const browser = require("webextension-polyfill");
 
   // Get power status and add class to it's element
   browser.storage.local.get("status").then(data => {
-    console.log(data)
+    // console.log(data)
     const status = data.status
     const power_element = document.getElementById("power_button")
     if(status) {
@@ -42,7 +42,7 @@ const browser = require("webextension-polyfill");
     }
     
     const sender = await browser.runtime.sendMessage("toggle_status")
-    console.log(sender)
+    // console.log(sender)
   })
 
 
