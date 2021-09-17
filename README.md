@@ -10,6 +10,10 @@
     Just another AdBlock but only for your favorite persian websites
     <br />
     <br />
+    <a href="https://chrome.google.com/webstore/detail/refused/omeglkgaklnjheplmjmmcgodhcnjckdf" title="Download for Chrome">Chrome</a>
+    &nbsp;-&nbsp;
+    <a href="https://addons.mozilla.org/en-US/firefox/addon/refused/" title="Download for Firefox">Firefox</a>
+    &nbsp;-&nbsp;  
     <a href="https://github.com/evokelektrique/refused/issues">Report Bug</a>
   </p>
 </p>
