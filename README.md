@@ -76,6 +76,6 @@ In this section, A list of Libraries & Frameworks used in the construction of th
 * [resolve-url-loader](https://www.npmjs.com/package/resolve-url-loader)
 
   
-<!-- CONTACT -->
-## Contact
-If you have any questions you can email(evoke.lektrique@gmail.com) me or DM me on Telegram [@evoke](https://t.me/evoke)
+<!-- Support -->
+## Support
+If you have any questions you can file an issue [here](https://github.com/evokelektrique/refused/issues) and if you liked this project, please leave a star ⭐
