@@ -6,14 +6,14 @@ const browser = require("webextension-polyfill");
   // Set up current tab url
   document.getElementById("current_tab_url").innerHTML = new URL(current_tab.url).host
 
-  const lang_status_on = browser.i18n.getMessage("status_on")
+  const lang_status_on  = browser.i18n.getMessage("status_on")
   const lang_status_off = browser.i18n.getMessage("status_off")
-  const element_status = document.getElementById("status")
+  const element_status  = document.getElementById("status")
 
   // Get power status and add class to it's element
   browser.storage.local.get("status").then(data => {
     // console.log(data)
-    const status = data.status
+    const status        = data.status
     const power_element = document.getElementById("power_button")
     if(status) {
       power_element.classList.add("power_on")
@@ -45,9 +45,7 @@ const browser = require("webextension-polyfill");
     // console.log(sender)
   })
 
-
   browser.storage.local.get("total_blocks").then(data => {
     document.getElementById("total_blocks").innerHTML = data.total_blocks
   })
 })()
-

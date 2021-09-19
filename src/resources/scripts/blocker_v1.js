@@ -1,5 +1,7 @@
+import { Helper } from './helper'
+import { CountDatabase } from './databases/count'
+
 const browser = require("webextension-polyfill");
-import { Helper } from "./helper"
 
 /**
  * Blocker version one based on manifest_version 2
@@ -24,7 +26,13 @@ export class BlockerV1 {
    * @return {object}         
    */
   blocker_listener(details) {
-    console.log(Helper.parse_url(details.url))
+    const parsed  = Helper.parse_url(details.url)
+    if(parsed.domain) {
+      console.log(parsed)
+      const counter = new CountDatabase(parsed.domain);
+      counter.increase()
+    }
+
     browser.storage.local.get("total_blocks").then(data => {
       const new_total = parseInt(data.total_blocks) + 1
       browser.browserAction.setBadgeText({

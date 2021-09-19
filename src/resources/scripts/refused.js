@@ -43,5 +43,4 @@ export class Refused {
   stop() {
     browser.webRequest.onBeforeRequest.removeListener(new this.blocker().blocker_listener)
   }
-
 }

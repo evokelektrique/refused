@@ -1,6 +1,7 @@
 import { filters } from "./filters"
 import { BlockerV1 } from "./blocker_v1"
 import { Refused } from "./refused"
+import { styles } from "./styles"
 
 const browser  = require("webextension-polyfill");
 const BASE_URL = "https://refused.ir"
@@ -19,10 +20,9 @@ browser.runtime.onInstalled.addListener(install_listener)
 
 // Fetch Stats
 function fetch_stats_on_got(data) {
-
   // Initialize Badge
   browser.browserAction.setBadgeBackgroundColor({
-    color: "#f44336"
+    color: styles.badge_color
   });
 
   const text = data.total_blocks !== undefined ? String(data.total_blocks) : "0";
