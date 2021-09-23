@@ -27,10 +27,8 @@ export class BlockerV1 {
    */
   blocker_listener(details) {
     const parsed  = Helper.parse_url(details.url)
-    if(parsed.domain) {
-      console.log(parsed)
-      const counter = new CountDatabase(parsed.domain);
-      counter.increase()
+    if(parsed.status) {
+      const counter = new CountDatabase({domain: parsed.domain, count: 1}).open()
     }
 
     browser.storage.local.get("total_blocks").then(data => {

@@ -3,28 +3,45 @@ export class Database {
 
   database = null // IndexedDB database name
   instance = null // IndexedDB database instance
-  version  = 1    // IndexedDB database version
+  versio   = 1    // IndexedDB database version
   data     = []
 
-  constructor(database) {
+  // Handlers
+  onerror         = null
+  onsuccess       = null
+  onupgradeneeded = null
+
+  /**
+   * Initialize an IndexedDB database
+   * @param  {string}  database Database name
+   * @param  {integer} version  Database version number
+   * @return {void}
+   */
+  constructor(database, version = 1) {
     if(!database) {
       return "Database not defined"
     }
 
+    // Check if current browser support IndexedDB
     if(!this.is_supported()) {
       return "Your browser doesn not support indexedDB"
     }
 
+    this.version  = version
     this.database = database
-    this.open()
   }
 
   /**
    * Open an IndexedDB database
-   * @return {IDBOpenDBRequest} Interface of the IndexedDB API
+   * @return {void}
    */
   open() {
     this.instance = window.indexedDB.open(this.database, this.version)
+
+    // Attach event handlers to current database instance
+    this.instance.onerror         = event => this.onerror(event)
+    this.instance.onsuccess       = event => this.onsuccess(event)
+    this.instance.onupgradeneeded = event => this.onupgradeneeded(event)
   }
 
   /**

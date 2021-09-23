@@ -17,7 +17,7 @@ export class Helper {
     }
 
     return {
-      status: (_url ? true : false),
+      status: (_url && domain ? true : false),
       url: _url.hostname,
       domain: domain
     }
