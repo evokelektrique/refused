@@ -1,93 +1,109 @@
-import { Database } from './db'
+import { Dexie } from 'dexie'
 
 const browser  = require("webextension-polyfill");
 
-// Blocked ads counter class
+/**
+ * Database for total blocked ads for given domain counter
+ * @class
+ */
 export class CountDatabase {
 
-  version = 1
+  // Database
+  columns          = "++id, domain, count" // Databased indexed columns
+  name             = "Counter"             // Database Name
+  version          = 1                     // Database Version
+
+  // Configuration
+  increment_number = 1                     // Count increment number
 
   /**
    * Initialize default values
+   *
    * @param  {object} data Contain configuration
    * @return {void}
    */
   constructor(data) {
-    this.count  = data.count ? data.count : 0 // Set to 0 on default
-    this.domain = data.domain
+    this.count  = data.count ? parseInt(data.count) : 1 // Set to 1 on default
+    this.domain = data.domain ? data.domain : false
   }
 
   /**
-   * Open or upgrade a database
-   * @return {void}
+   * Open database and define its stores and indexed columns
+   *
+   * @return {Dexie} Dexie database instance
    */
-  open() {
-    const instance = new Database(this.domain, this.version)
+  async open() {
+    const db = new Dexie(this.name)
+    db.version(this.version).stores({ domains: this.columns })
 
-    // Attach database handlers
-    instance.onerror         = event => this.onerror(event)
-    instance.onsuccess       = event => this.onsuccess(event)
-    instance.onupgradeneeded = event => this.onupgradeneeded(event)
-
-    instance.open()
+    return db;
   }
 
   /**
-   * Handle database errors
-   * @param  {Event} event
-   * @return {void}
+   * Find or create counter based on domain
+   *
+   * @param  {Dexie} db Dexie database instance
+   * @return {object}   Found or created domain counter object
    */
-  onerror(event) {
-    console.log("Database error")
-  }
+  async find_or_create(db) {
+    // Determine weither the domain is created or updated
+    let is_created = true
 
-  /**
-   * Handle database success
-   * @param  {Event} event
-   * @return {void}
-   */
-  onsuccess(event) {
-    console.log("Successfull")
-    const db = event.target.result
-    // console.log(db)
-    // db.createObjectStore('books', {keyPath: 'id'});
-    let transaction = db.transaction("books", "readwrite"); // (1)
+    const object   = { domain: this.domain, count: this.count }
+    const domain   = await db.domains.get({ domain: this.domain })
 
-    // get an object store to operate on it
-    let books = transaction.objectStore("books"); // (2)
-
-    let book = {
-      id: 'js',
-      price: 10,
-      created: new Date()
-    };
-
-    let request = books.add(book); // (3)
-
-    request.onsuccess = function() { // (4)
-      console.log("Book added to the store", request.result);
-    };
-
-    request.onerror = function() {
-      console.log("Error", request.error);
-    };
-  }
-
-  onupgradeneeded(event) {
-    console.log(event, "Database change detected")
-    let db = event.target.result;
-    if (!db.objectStoreNames.contains('books')) { // if there's no "books" store
-      db.createObjectStore('books', {keyPath: 'id'}); // create it
+    // If domain does not exists, return the current object
+    if(!domain) {
+      is_created = false
+      await db.domains.add(object)
+      return { domain: domain, is_created: is_created }
     }
+
+    return { domain: domain, is_created: is_created }
   }
 
-  increase(db) {
-    // browser.storage.local.get(this.domain).then(result => {
-    //   if(Object.keys(result).length !== 0) {
-    //     this.count = result
-    //   }
+  /**
+   * Increment current domain counter based on the configured `increment_number`
+   *
+   * @param  {Dexie} db Dexie indexedDB instance
+   * @return {object}   Incremented domain counter
+   */
+  async increment(db) {
+    // Fetch the given domain
+    const { domain } = await this.find_or_create(db)
 
-    //   console.log(this)
-    // })
+    // Increment its counter
+    domain.count += this.increment_number
+
+    // Do the update here
+    const update = await db.domains.update(domain.id, { count: domain.count })
+
+    return { domain: domain, update_status: update }
   }
+
+  /**
+   * Increase the given domain counter
+   *
+   * @return {object} incremented domain with its update status
+   */
+  async increase() {
+    const db        = await this.open()
+    const increment = await this.increment(db)
+
+    return increment
+  }
+
+  /**
+   * Get domain counter
+   *
+   * @param  {string} domain Web page domain name
+   * @return {object}        Domain and its properties from database
+   */
+  async get_domain(domain) {
+    const db    = await this.open()
+    const value = db.domains.get({ domain: domain })
+
+    return value
+  }
+
 }

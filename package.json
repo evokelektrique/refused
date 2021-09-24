@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dexie": "^3.0.3",
     "laravel-mix": "^6.0.25",
     "vazir-font": "^29.1.0"
   },

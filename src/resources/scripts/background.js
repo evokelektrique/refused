@@ -4,36 +4,34 @@ import { Refused } from "./refused"
 import { styles } from "./styles"
 
 const browser  = require("webextension-polyfill");
-const BASE_URL = "https://refused.ir"
+const base_url = "https://refused.ir"
 
 // On Install Handler
 function install_listener(details) {
   // Detect if the extension is installed or updated
   if(details.reason === "install") {
     browser.storage.local.set({ status: true })
-    browser.storage.local.set({ total_blocks: "0" })
+    // browser.storage.local.set({ total_blocks: "0" })
   } else {
-    chrome.tabs.create({url: BASE_URL + "/update.html"})
+    chrome.tabs.create({url: base_url + "/update.html"})
   }
 }
 browser.runtime.onInstalled.addListener(install_listener)
 
-// Fetch Stats
-function fetch_stats_on_got(data) {
-  // Initialize Badge
-  browser.browserAction.setBadgeBackgroundColor({
-    color: styles.badge_color
-  });
-
-  const text = data.total_blocks !== undefined ? String(data.total_blocks) : "0";
-  console.log(text)
-  browser.browserAction.setBadgeText({
-    text: text
-  });
-}
-
-const fetch_total_blocks = browser.storage.local.get("total_blocks")
-fetch_total_blocks.then(fetch_stats_on_got)
+// // Fetch Stats
+// function fetch_stats_on_got(data) {
+//   // Initialize Badge
+//   browser.browserAction.setBadgeBackgroundColor({
+//     color: styles.badge_color
+//   });
+//   const text = data.total_blocks !== undefined ? String(data.total_blocks) : "0";
+//   // console.log(text)
+//   // browser.browserAction.setBadgeText({
+//   //   text: text
+//   // });
+// }
+// const fetch_total_blocks = browser.storage.local.get("total_blocks")
+// fetch_total_blocks.then(fetch_stats_on_got)
 
 // Initialize a Refused class
 // And setting up its handlers
@@ -50,8 +48,7 @@ browser.runtime.onConnect.addListener(port => {
 
 // Listener
 browser.runtime.onMessage.addListener( request => {
-  // console.log(request)
-  if( request === "toggle_status" ) {
+  if(request === "toggle_status") {
     browser.storage.local.get("status").then(data => {
       // Store new status received from `popup.js`
       const new_status = !data.status
@@ -64,7 +61,7 @@ browser.runtime.onMessage.addListener( request => {
         refused.start()
       }
 
-      return Promise.resolve( { status: new_status} )
+      return Promise.resolve({ status: new_status })
     })
   }
 

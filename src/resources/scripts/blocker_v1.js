@@ -8,6 +8,7 @@ const browser = require("webextension-polyfill");
  * @class
  */
 export class BlockerV1 {
+
   /**
    * Add a listener on before any request initiates.
    * If the URL includes in given 'filters', it will block it
@@ -15,29 +16,28 @@ export class BlockerV1 {
    */
   block_urls(filters) {
     browser.webRequest.onBeforeRequest.addListener(
-      this.blocker_listener,
+      this.listener,
       {urls: filters},
       ["blocking"]
     );
   }
 
   /**
+   * Listen and parse incoming requests to block
+   *
    * @param  {object} details
    * @return {object}         
    */
-  blocker_listener(details) {
+  listener(details) {
     const parsed  = Helper.parse_url(details.url)
     if(parsed.status) {
-      const counter = new CountDatabase({domain: parsed.domain, count: 1}).open()
+      const config  = { domain: parsed.domain, count: 0 }
+      const counter = new CountDatabase(config).increase().then(incremented => {
+        browser.browserAction.setBadgeText({
+          text: String(incremented.domain.count)
+        });
+      })
     }
-
-    browser.storage.local.get("total_blocks").then(data => {
-      const new_total = parseInt(data.total_blocks) + 1
-      browser.browserAction.setBadgeText({
-        text: String(new_total)
-      });
-      browser.storage.local.set({total_blocks: new_total})
-    })
 
     return {
       cancel: true
