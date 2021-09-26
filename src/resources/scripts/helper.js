@@ -1,3 +1,5 @@
+const browser = require("webextension-polyfill");
+
 export class Helper {
   /**
    * Parse and validate given URL
@@ -21,5 +23,11 @@ export class Helper {
       url: _url.hostname,
       domain: domain
     }
+  }
+
+  static set_badge(text) {
+    browser.browserAction.setBadgeText({
+      text: String(text)
+    });
   }
 }

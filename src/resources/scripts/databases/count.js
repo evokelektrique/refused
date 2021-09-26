@@ -56,7 +56,7 @@ export class CountDatabase {
     if(!domain) {
       is_created = false
       await db.domains.add(object)
-      return { domain: domain, is_created: is_created }
+      return { domain: object, is_created: is_created }
     }
 
     return { domain: domain, is_created: is_created }

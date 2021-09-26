@@ -33,9 +33,7 @@ export class BlockerV1 {
     if(parsed.status) {
       const config  = { domain: parsed.domain, count: 0 }
       const counter = new CountDatabase(config).increase().then(incremented => {
-        browser.browserAction.setBadgeText({
-          text: String(incremented.domain.count)
-        });
+        Helper.set_badge(incremented.domain.count)
       })
     }
 
