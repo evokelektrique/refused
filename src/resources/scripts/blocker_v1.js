@@ -1,5 +1,6 @@
 import { Helper } from './helper'
 import { CountDatabase } from './databases/count'
+import { SettingsDatabase } from './databases/settings'
 
 const browser = require("webextension-polyfill");
 
@@ -29,7 +30,10 @@ export class BlockerV1 {
    * @return {object}         
    */
   listener(details) {
-    const parsed  = Helper.parse_url(details.url)
+    // Parse current URL
+    const parsed = Helper.parse_url(details.url)
+
+    // Validate request URL and increase the total blocked times counter
     if(parsed.status) {
       const config  = { domain: parsed.domain, count: 0 }
       const counter = new CountDatabase(config).increase().then(incremented => {
@@ -37,8 +41,11 @@ export class BlockerV1 {
       })
     }
 
-    return {
-      cancel: true
-    }
+    new SettingsDatabase().get_settings().then(settings => {
+      console.log("Settings in blocker", settings)
+    })
+
+    // Block
+    return { cancel: true }
   }
 }

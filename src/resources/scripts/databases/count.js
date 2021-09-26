@@ -1,6 +1,6 @@
 import { Dexie } from 'dexie'
 
-const browser  = require("webextension-polyfill");
+const browser = require("webextension-polyfill");
 
 /**
  * Database for total blocked ads for given domain counter
@@ -36,7 +36,7 @@ export class CountDatabase {
     const db = new Dexie(this.name)
     db.version(this.version).stores({ domains: this.columns })
 
-    return db;
+    return db
   }
 
   /**

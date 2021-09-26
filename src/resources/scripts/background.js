@@ -67,3 +67,18 @@ browser.runtime.onMessage.addListener( request => {
 
   return true
 })
+
+function logTabs(windowInfo) {
+  for (let tabInfo of windowInfo.tabs) {
+    console.log(tabInfo.url);
+  }
+}
+
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+browser.browserAction.onClicked.addListener((tab) => {
+  var getting = browser.windows.getCurrent({populate: true});
+  getting.then(logTabs, onError);
+});
