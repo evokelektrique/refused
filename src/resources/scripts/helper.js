@@ -13,7 +13,11 @@ export class Helper {
 
     try {
       _url   = new URL(url)
-      domain = _url.hostname.replace(/^[^.]+\./g, '');
+      if(_url.hostname.includes("www.")) {
+        domain = _url.hostname.replace(/^[^.]+\./g, '')
+      } else {
+        domain = _url.hostname
+      }
     } catch(error) {
       _url   = null
       domain = null
