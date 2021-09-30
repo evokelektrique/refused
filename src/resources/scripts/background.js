@@ -2,12 +2,17 @@ import { filters } from "./filters"
 import { BlockerV1 } from "./blocker_v1"
 import { Refused } from "./refused"
 import { styles } from "./styles"
+import { Helper } from "./helper"
 import { SettingsDatabase } from './databases/settings'
+import { TabManager } from './tab_manager'
 
 // Initialize default settings
 new SettingsDatabase().set_settings()
 
-const browser  = require("webextension-polyfill");
+// Initialize tab manager
+const tab_manager = new TabManager()
+
+const browser  = require("webextension-polyfill")
 const base_url = "https://refused.ir"
 
 // On Install Handler
@@ -23,12 +28,13 @@ function install_listener(details) {
 }
 browser.runtime.onInstalled.addListener(install_listener)
 
+// Initialize Badge
+browser.browserAction.setBadgeBackgroundColor({
+  color: styles.badge_color
+});
+
 // // Fetch Stats
 // function fetch_stats_on_got(data) {
-//   // Initialize Badge
-//   browser.browserAction.setBadgeBackgroundColor({
-//     color: styles.badge_color
-//   });
 //   const text = data.total_blocks !== undefined ? String(data.total_blocks) : "0";
 //   // console.log(text)
 //   // browser.browserAction.setBadgeText({
