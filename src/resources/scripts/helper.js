@@ -1,8 +1,9 @@
-const browser = require("webextension-polyfill");
+const browser = require("webextension-polyfill")
 
 export class Helper {
   /**
    * Parse and validate given URL
+   *
    * @param  {string} url hostname
    * @return {object}     hostname on success or error
   */
@@ -25,9 +26,24 @@ export class Helper {
     }
   }
 
-  static set_badge(text) {
+  /**
+   * Change badge text
+   *
+   * @param {string|integer} message
+   */
+  static set_badge(message) {
     browser.browserAction.setBadgeText({
-      text: String(text)
-    });
+      text: String(message)
+    })
+  }
+
+  /**
+   * Wait for a while
+   *
+   * @param  {integer} ms Time to wait in ms
+   * @return {promise}
+   */
+  static sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
