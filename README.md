@@ -32,8 +32,8 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#built-with">Built With</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#dependencies">Dependencies</a></li>
+    <li><a href="#support">Support</a></li>
   </ol>
 </details>
 
