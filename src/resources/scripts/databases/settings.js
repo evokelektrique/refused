@@ -10,7 +10,7 @@ export class SettingsDatabase {
 
   // Configuration
   default_settings = {
-    test: "test !",
+    // Power on/off switch status
     status: true
   }
 
@@ -43,10 +43,9 @@ export class SettingsDatabase {
     const db = await this.open()
     const settings = {}
 
-    console.log(this.default_settings)
-
     Object.entries(this.default_settings).forEach(async ([key, value]) => {
       const setting = await this.find_or_create(db, key, value)
+
       if(setting) {
         settings[setting.key] = setting.value
       }
