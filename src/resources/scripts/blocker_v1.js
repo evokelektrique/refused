@@ -1,12 +1,12 @@
 import { Helper } from './helper'
 import { CountDatabase } from './databases/count'
 import { SettingsDatabase } from './databases/settings'
+import { TabListener } from './tab_listener'
 
-const browser = require("webextension-polyfill");
+const browser = require("webextension-polyfill")
 
 /**
  * Blocker version one based on manifest_version 2
- * @class
  */
 export class BlockerV1 {
 
@@ -27,7 +27,7 @@ export class BlockerV1 {
    * Listen and parse incoming requests to block
    *
    * @param  {object} details
-   * @return {object}         
+   * @return {object}
    */
   listener(details) {
     // Parse current URL
@@ -37,7 +37,13 @@ export class BlockerV1 {
     if(parsed.status) {
       const config  = { domain: parsed.domain, count: 0 }
       const counter = new CountDatabase(config).increase().then(incremented => {
-        Helper.set_badge(incremented.domain.count)
+        // On each blocked ads, increase
+        // the counter of current domain
+        // on active tab.
+        browser.tabs.query({ active: true }).then(
+          TabListener.on_domain,
+          TabListener.on_error
+        )
       })
     }
 

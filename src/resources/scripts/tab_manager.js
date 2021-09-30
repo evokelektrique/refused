@@ -18,7 +18,7 @@ export class TabManager {
    * @return {void}
    */
   constructor() {
-    this.listener = new TabListener(this.on_active, this.on_error).listener
+    this.listener = new TabListener(this.on_active, this.on_error, this.on_domain).listener
 
     if(!this.has_listener()) {
       browser.tabs.onActivated.addListener(this.listener)
@@ -53,6 +53,7 @@ export class TabManager {
       // Get current domain counter
       const config  = { domain: parsed.domain, count: 0 }
       const counter = await new CountDatabase(config).get_domain(parsed.domain)
+      console.log(parsed.domain, counter)
 
       if(counter) {
         Helper.set_badge(counter.count)
@@ -60,7 +61,23 @@ export class TabManager {
         Helper.set_badge(config.count)
       }
     }
+  }
 
+  on_domain(tabs) {
+    console.log("THIS IS ON DOMAIN !")
+
+    // Fetch and attach current tab
+    const tab = tabs[0]
+
+    // Parse and validate current tab url
+    const parsed = Helper.parse_url(tab.url)
+
+    if(parsed.status) {
+      const config  = { domain: parsed.domain, count: 0 }
+      const counter = new CountDatabase(config).increase().then(incremented => {
+        Helper.set_badge(incremented.domain.count)
+      })
+    }
   }
 
   /**

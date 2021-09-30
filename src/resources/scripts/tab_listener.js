@@ -9,6 +9,7 @@ export class TabListener {
 
   static on_active = null
   static on_error  = null
+  static on_domain = null
 
   /**
    * Attach events
@@ -17,9 +18,10 @@ export class TabListener {
    * @param  {function} on_error  Event for on_error
    * @return {void}
    */
-  constructor(on_active, on_error) {
+  constructor(on_active, on_error, on_domain) {
     TabListener.on_active = on_active
     TabListener.on_error  = on_error
+    TabListener.on_domain  = on_domain
   }
 
   /**
