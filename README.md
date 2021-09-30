@@ -67,7 +67,7 @@ Or you can self install it your self by following instructions explained below
    Or you can add `--production` argument to minify the codes
 4. Load extension on Firefox by opening the `about:debugging` url and by clicking on the `Load Temporary Add-on` button and then select the `manifest.json` file located in the root of `./build` folder
 
-### Built With
+### Dependencies
 In this section, A list of Libraries & Frameworks used in the development process of this project mentioned below.
 * [webextension-polyfill](https://github.com/mozilla/webextension-polyfill)
 * [laravel-mix](https://laravel-mix.com)
