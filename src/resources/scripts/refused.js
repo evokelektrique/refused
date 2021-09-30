@@ -41,6 +41,6 @@ export class Refused {
    * Stops blocking the ads, by removing its listener
    */
   stop() {
-    browser.webRequest.onBeforeRequest.removeListener(new this.blocker().blocker_listener)
+    browser.webRequest.onBeforeRequest.removeListener(new this.blocker().listener)
   }
 }

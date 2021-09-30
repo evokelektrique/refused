@@ -1,8 +1,11 @@
+import { SettingsDatabase } from './databases/settings'
+
 const browser = require("webextension-polyfill");
 
 // Initialize Configuration & Display
 (async () => {
   const current_tab = await browser.tabs.query({currentWindow: true, active: true}).then(tab => tab[0])
+
   // Set up current tab url
   document.getElementById("current_tab_url").innerHTML = new URL(current_tab.url).host
 
@@ -10,10 +13,14 @@ const browser = require("webextension-polyfill");
   const lang_status_off = browser.i18n.getMessage("status_off")
   const element_status  = document.getElementById("status")
 
-  // Get power status and add class to it's element
-  browser.storage.local.get("status").then(data => {
-    // console.log(data)
-    const status        = data.status
+  // Get power on/off switch status and add class to its element
+  new SettingsDatabase().open().then(async db => {
+
+    // Find status from settings database
+    const key        = "status"
+    const get        = await db.settings.get({ key: key })
+    const status     = get.value
+
     const power_element = document.getElementById("power_button")
     if(status) {
       power_element.classList.add("power_on")
@@ -42,7 +49,6 @@ const browser = require("webextension-polyfill");
     }
     
     const sender = await browser.runtime.sendMessage("toggle_status")
-    // console.log(sender)
   })
 
   browser.storage.local.get("total_blocks").then(data => {

@@ -39,19 +39,13 @@ export class SettingsDatabase {
    *
    * @return {object} Settings stored in indexedDB
    */
-  async get_settings() {
+  async set_settings() {
     const db = await this.open()
-    const settings = {}
 
     Object.entries(this.default_settings).forEach(async ([key, value]) => {
-      const setting = await this.find_or_create(db, key, value)
-
-      if(setting) {
-        settings[setting.key] = setting.value
-      }
+      console.log(`Setting up "${key}"->(${value})`) // TODO: Remove
+      await this.find_or_create(db, key, value)
     })
-
-    return settings
   }
 
   /**

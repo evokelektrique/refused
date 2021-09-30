@@ -41,10 +41,6 @@ export class BlockerV1 {
       })
     }
 
-    new SettingsDatabase().get_settings().then(settings => {
-      console.log("Settings in blocker", settings)
-    })
-
     // Block
     return { cancel: true }
   }
