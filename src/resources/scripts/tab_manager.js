@@ -1,4 +1,6 @@
+import { Helper } from './helper'
 import { TabListener } from './tab_listener'
+import { CountDatabase } from './databases/count'
 
 const browser = require("webextension-polyfill")
 
@@ -38,9 +40,27 @@ export class TabManager {
    * @param  {array} tabs List of tabs in current window
    * @return {void}
    */
-  on_active(tabs) {
-    TabManager.current_tab = tabs[0]
-    console.log(TabManager.current_tab)
+  async on_active(tabs) {
+    // Fetch and attach current tab
+    const tab = tabs[0]
+    TabManager.current_tab = tab
+
+    // Parse and validate current tab url
+    const parsed = Helper.parse_url(tab.url)
+
+    if(parsed.status) {
+
+      // Get current domain counter
+      const config  = { domain: parsed.domain, count: 0 }
+      const counter = await new CountDatabase(config).get_domain(parsed.domain)
+
+      if(counter) {
+        Helper.set_badge(counter.count)
+      } else {
+        Helper.set_badge(config.count)
+      }
+    }
+
   }
 
   /**
