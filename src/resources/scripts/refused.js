@@ -20,11 +20,7 @@ export class Refused {
   async start() {
     const filters = await new FilterDatabase().get_filters()
     if(!this.blocker) {
-      throw new Error("Blocker is not set up")
-    }
-
-    if(!filters.length > 0) {
-      throw new Error("No filter found")
+      throw new Error("No Blocker is found")
     }
 
     // Initiate Blocker class
