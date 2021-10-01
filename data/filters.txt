@@ -3,5 +3,6 @@
 *://*.kaprila.com/*
 ! Comment two
 *://*.mediaad.org/*
-
+*://*.mediaad.org/*
+*://*.mediaad2.org/*
 !Comment Three
