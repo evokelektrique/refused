@@ -1,0 +1,7 @@
+! This is a comment
+*://*.yektanet.com/*
+*://*.kaprila.com/*
+! Comment two
+*://*.mediaad.org/*
+
+!Comment Three
