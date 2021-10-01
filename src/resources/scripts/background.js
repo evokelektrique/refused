@@ -1,10 +1,14 @@
-import { filters } from "./filters"
+import { SettingsDatabase } from "./databases/settings"
+import { FilterDatabase } from "./databases/filter"
+import { TabManager } from "./tab_manager"
 import { BlockerV1 } from "./blocker_v1"
+import { constants } from "./constants"
 import { Refused } from "./refused"
 import { styles } from "./styles"
 import { Helper } from "./helper"
-import { SettingsDatabase } from './databases/settings'
-import { TabManager } from './tab_manager'
+
+// Apply filters
+new FilterDatabase().set_filters()
 
 // Initialize default settings
 new SettingsDatabase().set_settings()
@@ -13,7 +17,6 @@ new SettingsDatabase().set_settings()
 const tab_manager = new TabManager()
 
 const browser  = require("webextension-polyfill")
-const base_url = "https://refused.ir"
 
 // On Install Handler
 function install_listener(details) {
@@ -23,7 +26,7 @@ function install_listener(details) {
     browser.storage.local.set({ status: true })
     // browser.storage.local.set({ total_blocks: "0" })
   } else {
-    chrome.tabs.create({url: base_url + "/update.html"})
+    chrome.tabs.create({url: constants.base_url + "/update.html"})
   }
 }
 browser.runtime.onInstalled.addListener(install_listener)
@@ -46,8 +49,8 @@ browser.browserAction.setBadgeBackgroundColor({
 
 // Initialize a Refused class
 // And setting up its handlers
-const refused = new Refused()
-refused.filters = filters
+
+const refused   = new Refused()
 refused.blocker = BlockerV1
 
 // Start Blocking Ads On Install
@@ -55,7 +58,7 @@ refused.start()
 
 // Open communication port
 browser.runtime.onConnect.addListener(port => {
-  port.onMessage.addListener(msg => console.log(msg)) 
+  port.onMessage.addListener(msg => console.log(msg))
 })
 
 // Listener

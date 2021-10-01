@@ -53,7 +53,6 @@ export class TabManager {
       // Get current domain counter
       const config  = { domain: parsed.domain, count: 0 }
       const counter = await new CountDatabase(config).get_domain(parsed.domain)
-      console.log(parsed.domain, counter)
 
       if(counter) {
         Helper.set_badge(counter.count)
@@ -64,8 +63,6 @@ export class TabManager {
   }
 
   on_domain(tabs) {
-    console.log("THIS IS ON DOMAIN !")
-
     // Fetch and attach current tab
     const tab = tabs[0]
 

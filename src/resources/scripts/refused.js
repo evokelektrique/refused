@@ -1,7 +1,8 @@
 const browser = require("webextension-polyfill");
+import { FilterDatabase } from "./databases/filter"
 
 export class Refused {
-  filters = []
+
   blocker = null
 
   constructor() {}
@@ -14,27 +15,21 @@ export class Refused {
   }
 
   /**
-   * @param  {array} filters 
-   */
-  set filters(filters) {
-    this.filters = filters
-  }
-
-  /**
    * Starts blocking the ads
    */
-  start() {
+  async start() {
+    const filters = await new FilterDatabase().get_filters()
     if(!this.blocker) {
       throw new Error("Blocker is not set up")
     }
 
-    if(!this.filters.length > 0) {
+    if(!filters.length > 0) {
       throw new Error("No filter found")
     }
 
     // Initiate Blocker class
     // it will start blocking urls by its own handler
-    const blocker = new this.blocker().block_urls(this.filters)
+    new this.blocker().block_urls(filters)
   }
 
   /**

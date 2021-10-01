@@ -37,9 +37,6 @@ export class TabListener {
     // to "user is dragging tab" issue with chrome.
     await Helper.sleep(200)
 
-    // TODO: Remove
-    console.log(`Tab ${activeInfo.tabId} was activated`);
-
     browser.tabs.query({ active: true }).then(
       TabListener.on_active,
       TabListener.on_error
