@@ -74,7 +74,8 @@ In this section, A list of Libraries & Frameworks used in the development proces
 * [sass-loader](https://www.npmjs.com/package/sass-loader)
 * [sass](https://www.npmjs.com/package/sass)
 * [resolve-url-loader](https://www.npmjs.com/package/resolve-url-loader)
-
+* [vazir-font](https://github.com/rastikerdar/vazir-font)
+* [Dexie.js](https://github.com/dfahlander/Dexie.js)
   
 <!-- Support -->
 ## Support
