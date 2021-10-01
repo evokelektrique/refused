@@ -23,7 +23,7 @@ function install_listener(details) {
 
   // Detect if the extension is installed or updated
   if(details.reason === "install") {
-    browser.storage.local.set({ status: true })
+    browser.storage.local.set({ status: false })
     // browser.storage.local.set({ total_blocks: "0" })
   } else {
     chrome.tabs.create({url: constants.base_url + "/update.html"})
@@ -53,8 +53,8 @@ browser.browserAction.setBadgeBackgroundColor({
 const refused   = new Refused()
 refused.blocker = BlockerV1
 
-// Start Blocking Ads On Install
-refused.start()
+// // Start Blocking Ads On Install
+// refused.start()
 
 // Open communication port
 browser.runtime.onConnect.addListener(port => {

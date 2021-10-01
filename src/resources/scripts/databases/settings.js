@@ -11,7 +11,7 @@ export class SettingsDatabase {
   // Configuration
   default_settings = {
     // Power on/off switch status
-    status: true
+    status: false
   }
 
   /**
