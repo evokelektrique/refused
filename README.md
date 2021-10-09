@@ -50,7 +50,7 @@ In this section, explanations are written in the following cases.
 ### Installation
 - [Chrome](https://chrome.google.com/webstore/detail/refused/omeglkgaklnjheplmjmmcgodhcnjckdf)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/refused/)
-- [Manually from latest release](https://github.com/evokelektrique/refused/releases/)
+- [Manually from latest release](https://github.com/evokelektrique/refused/releases/latest)
 
 Or you can self install it your self by following instructions explained below
 1. Clone the repo
