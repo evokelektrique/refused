@@ -50,4 +50,9 @@ export class Helper {
   static sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  static async get_current_tab() {
+    return await browser.tabs.query({currentWindow: true, active: true}).then(tab => tab[0])
+  }
+
 }

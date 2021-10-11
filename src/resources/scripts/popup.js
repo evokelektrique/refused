@@ -1,4 +1,5 @@
 import { SettingsDatabase } from './databases/settings'
+import { Helper } from './helper'
 
 const browser = require("webextension-polyfill");
 
@@ -20,7 +21,7 @@ async function get_power_status(db) {
 
 // Initialize Configuration & Display
 (async () => {
-  const current_tab = await browser.tabs.query({currentWindow: true, active: true}).then(tab => tab[0])
+  const current_tab = await Helper.get_current_tab()
 
   // Set up current tab url
   document.getElementById("current_tab_url").innerHTML = new URL(current_tab.url).host
