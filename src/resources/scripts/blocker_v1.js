@@ -35,6 +35,9 @@ export class BlockerV1 {
 
     // Validate request URL and increase the total blocked times counter
     if(parsed.status) {
+      // Increment total blocked ads
+      new SettingsDatabase().increase_total_blocks()
+
       const config  = { domain: parsed.domain, count: 0 }
       const counter = new CountDatabase(config).increase().then(incremented => {
         // On each blocked ads, increase
