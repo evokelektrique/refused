@@ -10,7 +10,7 @@ const browser = require("webextension-polyfill");
 export class FilterDatabase {
 
   // Database
-  columns          = "++id, wildcard" // Databased indexed columns
+  columns          = "++id, wildcard" // Database indexed columns
   name             = "Filters"        // Database Name
   version          = 1                // Database Version
 
