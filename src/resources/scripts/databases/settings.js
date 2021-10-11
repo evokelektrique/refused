@@ -12,7 +12,8 @@ export class SettingsDatabase {
   default_settings = {
     // Power on/off switch status
     status: true,
-    total_blocks: 0
+    total_blocks: 0,
+    last_filters_update: null
   }
 
   /**
