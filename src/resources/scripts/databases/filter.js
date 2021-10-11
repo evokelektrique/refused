@@ -34,13 +34,15 @@ export class FilterDatabase {
   }
 
   async set_filters() {
-    const db = await this.open()
-    const body    = await this.get_filters_txt()
+    const db   = await this.open()
+    const body = await this.get_filters_txt()
     const filters = this.parse_filters(body)
 
     filters.forEach(async wildcard => {
       await this.find_or_create(db, wildcard)
     })
+
+    return Promise.resolve({status: true})
   }
 
   async get_filters() {
@@ -59,6 +61,7 @@ export class FilterDatabase {
    * @return {object}   Found or created wildcard filter object
    */
   async find_or_create(db, wildcard) {
+
     // Determine weither the wildcard is created or updated
     let is_created = true
 

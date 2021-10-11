@@ -7,16 +7,13 @@ import { Refused } from "./refused"
 import { styles } from "./styles"
 import { Helper } from "./helper"
 
-// Apply filters
-new FilterDatabase().set_filters()
-
-// Initialize default settings
-new SettingsDatabase().set_settings()
+const browser  = require("webextension-polyfill")
 
 // Initialize tab manager
 const tab_manager = new TabManager()
 
-const browser  = require("webextension-polyfill")
+// Initialize default settings
+new SettingsDatabase().set_settings()
 
 // On Install Handler
 function install_listener(details) {
@@ -53,8 +50,8 @@ browser.browserAction.setBadgeBackgroundColor({
 const refused   = new Refused()
 refused.blocker = BlockerV1
 
-// // Start Blocking Ads On Install
-// refused.start()
+// Start Blocking Ads On Install
+refused.start()
 
 // Open communication port
 browser.runtime.onConnect.addListener(port => {

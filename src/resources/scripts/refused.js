@@ -18,6 +18,9 @@ export class Refused {
    * Starts blocking the ads
    */
   async start() {
+
+    // Apply filters
+    await new FilterDatabase().set_filters()
     const filters = await new FilterDatabase().get_filters()
     if(!this.blocker) {
       throw new Error("Blocker is not set up")
