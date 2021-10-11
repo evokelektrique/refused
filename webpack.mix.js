@@ -19,3 +19,4 @@ mix.copy([
 ], "build/images")
 
 mix.copyDirectory("src/_locales", "build/_locales/")
+mix.copyDirectory("src/resources/scripts/injects", "build/injects/")
