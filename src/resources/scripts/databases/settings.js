@@ -57,7 +57,7 @@ export class SettingsDatabase {
    * @param  {string} value Value to store
    * @return {object}       Object found or created in indexedDB database
    */
-  async find_or_create(db, key, value) {
+  async find_or_create(db, key, value = null) {
     const found = await db.settings.get({ key: key })
 
     if(!found) {
@@ -78,8 +78,18 @@ export class SettingsDatabase {
     return this.default_settings[key]
   }
 
+  /**
+   * Increase total blocked ads
+   *
+   * @param  {Number} count Incremental step number
+   * @return {void}
+   */
   async increase_total_blocks(count = 1) {
     const db = await this.open()
+    const key = "total_blocks"
+    const get = await db.settings.get({ key: key })
+
+    await db.settings.update(get.id, { value: get.value + count })
   }
 
 }
