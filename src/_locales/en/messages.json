@@ -6,5 +6,9 @@
   "status_off": {
     "message": "Tap to start blocking the ads.",
     "description": "When power is off"
+  },
+  "url_not_supported": {
+    "message": "Invalid URL",
+    "description": "When the current tab url is not supported by the `Helper.parse_url`"
   }
 }

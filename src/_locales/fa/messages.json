@@ -6,5 +6,9 @@
   "status_off": {
     "message": "برای شروع مسدود کردن تبلیغات کلیک کنید",
     "description": "زمانی که افزونه فعال نیست"
+  },
+  "url_not_supported": {
+    "message": "آدرس نا معتبر",
+    "description": "هنگامی که آدرس تب کنونی نا معتبر می باشد توسط `Helper.parse_url`"
   }
 }

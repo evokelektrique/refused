@@ -1,4 +1,5 @@
 import { SettingsDatabase } from './databases/settings'
+import { CountDatabase } from './databases/count'
 import { Helper } from './helper'
 
 const browser = require("webextension-polyfill");
@@ -23,22 +24,49 @@ async function get_power_status(db) {
 (async () => {
 
   // Elements
-  const element_current_tab_url   = document.getElementById("current_tab_url")
-  const element_current_power     = document.getElementById("power_button")
-  const element_current_status    = document.getElementById("status")
-  const element_block_information = document.getElementById("block_information")
+  const element_total_blocks         = document.getElementById("total_blocks")
+  const element_current_tab_url      = document.getElementById("current_tab_url")
+  const element_current_power        = document.getElementById("power_button")
+  const element_current_status       = document.getElementById("status")
+  const element_block_information    = document.getElementById("block_information")
+  const element_total_on_page_blocks = document.getElementById("total_on_page_blocks")
 
-  const lang_status_on  = browser.i18n.getMessage("status_on")
-  const lang_status_off = browser.i18n.getMessage("status_off")
+  // Translations
+  const lang_status_on         = browser.i18n.getMessage("status_on")
+  const lang_status_off        = browser.i18n.getMessage("status_off")
+  const lang_url_not_supported = browser.i18n.getMessage("url_not_supported")
 
-  // Set up current tab url
+  // Parse and setup current tab url
   const current_tab = await Helper.get_current_tab()
-  element_current_tab_url.innerHTML = new URL(current_tab.url).host
+  const parsed_url  = Helper.parse_url(current_tab.url)
+
+  // Validate current tab url
+  if(!parsed_url.status) {
+    element_current_tab_url.innerText = lang_url_not_supported
+
+    return;
+  }
+
+  // Set the current website domain to the element
+  element_current_tab_url.innerText = parsed_url.domain
+
+  // Get current website domain counter
+  const config = { count: 0, domain: parsed_url.domain }
+  const domain_counter = await new CountDatabase(config).get_domain(parsed_url.domain)
+
+  if(domain_counter) {
+    // Set total blocked ads on current domain to the element
+    element_total_on_page_blocks.innerText = domain_counter.count
+  }
+
   // Get power on/off switch status and add class to its element
   new SettingsDatabase().open().then(async db => {
-
     const status       = await get_power_status(db)
     const total_blocks = await get_total_blocks(db)
+
+    if(total_blocks) {
+      element_total_blocks.innerText = total_blocks
+    }
 
     if(status) {
       element_current_power.classList.add("power_on")
