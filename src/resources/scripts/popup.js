@@ -5,7 +5,7 @@ const browser = require("webextension-polyfill");
 
 // Find total_blocked ads from settings database
 async function get_total_blocks(db) {
-  const key = "total_block"
+  const key = "total_blocks"
   const get = await db.settings.get({ key: key })
 
   return get.value
@@ -24,7 +24,8 @@ async function get_power_status(db) {
   const current_tab = await Helper.get_current_tab()
 
   // Set up current tab url
-  document.getElementById("current_tab_url").innerHTML = new URL(current_tab.url).host
+  const element_current_tab_url = document.getElementById("current_tab_url")
+  element_current_tab_url.innerHTML = new URL(current_tab.url).host
 
   const lang_status_on  = browser.i18n.getMessage("status_on")
   const lang_status_off = browser.i18n.getMessage("status_off")
@@ -65,11 +66,5 @@ async function get_power_status(db) {
     
     const sender = await browser.runtime.sendMessage("toggle_status")
   })
-
-  // browser.storage.local.get("total_blocks").then(data => {
-  //   document.getElementById("total_blocks").innerHTML = data.total_blocks
-  // })
-
-
 
 })()
