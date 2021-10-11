@@ -19,7 +19,6 @@ export class TabManager {
    * @return {void}
    */
   constructor() {
-
     // Inject CSS/JS files into current tab
     new Injector()
 
@@ -28,7 +27,6 @@ export class TabManager {
       browser.tabs.onActivated.addListener(this.listener)
     }
   }
-
 
   /**
    * Determine if listener exists or already added
@@ -67,6 +65,12 @@ export class TabManager {
     }
   }
 
+  /**
+   * Increment the current tab domain blocked ads counter
+   *
+   * @param  {object} tabs Array of tabs
+   * @return {void}
+   */
   on_domain(tabs) {
     // Fetch and attach current tab
     const tab = tabs[0]
