@@ -78,4 +78,8 @@ export class SettingsDatabase {
     return this.default_settings[key]
   }
 
+  async increase_total_blocks(count = 1) {
+    const db = await this.open()
+  }
+
 }

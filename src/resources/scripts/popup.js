@@ -2,6 +2,22 @@ import { SettingsDatabase } from './databases/settings'
 
 const browser = require("webextension-polyfill");
 
+// Find total_blocked ads from settings database
+async function get_total_blocks(db) {
+  const key = "total_block"
+  const get = await db.settings.get({ key: key })
+
+  return get.value
+}
+
+// Find status from settings database
+async function get_power_status(db) {
+  const key        = "status"
+  const get        = await db.settings.get({ key: key })
+
+  return get.value
+}
+
 // Initialize Configuration & Display
 (async () => {
   const current_tab = await browser.tabs.query({currentWindow: true, active: true}).then(tab => tab[0])
@@ -16,10 +32,8 @@ const browser = require("webextension-polyfill");
   // Get power on/off switch status and add class to its element
   new SettingsDatabase().open().then(async db => {
 
-    // Find status from settings database
-    const key        = "status"
-    const get        = await db.settings.get({ key: key })
-    const status     = get.value
+    const status       = await get_power_status(db)
+    const total_blocks = await get_total_blocks(db)
 
     const power_element = document.getElementById("power_button")
     if(status) {
@@ -51,7 +65,10 @@ const browser = require("webextension-polyfill");
     const sender = await browser.runtime.sendMessage("toggle_status")
   })
 
-  browser.storage.local.get("total_blocks").then(data => {
-    document.getElementById("total_blocks").innerHTML = data.total_blocks
-  })
+  // browser.storage.local.get("total_blocks").then(data => {
+  //   document.getElementById("total_blocks").innerHTML = data.total_blocks
+  // })
+
+
+
 })()
