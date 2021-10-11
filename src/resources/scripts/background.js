@@ -19,11 +19,10 @@ new SettingsDatabase().set_settings()
 function install_listener(details) {
 
   // Detect if the extension is installed or updated
+  console.log(details)
   if(details.reason === "install") {
-    browser.storage.local.set({ status: false })
-    // browser.storage.local.set({ total_blocks: "0" })
   } else {
-    chrome.tabs.create({url: constants.base_url + "/update.html"})
+    browser.tabs.create({url: constants.base_url + "/update.html"})
   }
 }
 browser.runtime.onInstalled.addListener(install_listener)
@@ -33,20 +32,8 @@ browser.browserAction.setBadgeBackgroundColor({
   color: styles.badge_color
 });
 
-// // Fetch Stats
-// function fetch_stats_on_got(data) {
-//   const text = data.total_blocks !== undefined ? String(data.total_blocks) : "0";
-//   // console.log(text)
-//   // browser.browserAction.setBadgeText({
-//   //   text: text
-//   // });
-// }
-// const fetch_total_blocks = browser.storage.local.get("total_blocks")
-// fetch_total_blocks.then(fetch_stats_on_got)
-
 // Initialize a Refused class
 // And setting up its handlers
-
 const refused   = new Refused()
 refused.blocker = BlockerV1
 
