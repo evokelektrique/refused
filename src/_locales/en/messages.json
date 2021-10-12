@@ -10,5 +10,9 @@
   "url_not_supported": {
     "message": "Invalid URL",
     "description": "When the current tab url is not supported by the `Helper.parse_url`"
+  },
+  "hide_element": {
+    "message": "Hide something on this page",
+    "description": "Hide elements on page button in popup"
   }
 }

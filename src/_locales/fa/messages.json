@@ -10,5 +10,9 @@
   "url_not_supported": {
     "message": "آدرس نا معتبر",
     "description": "هنگامی که آدرس تب کنونی نا معتبر می باشد توسط `Helper.parse_url`"
+  },
+  "hide_element": {
+    "message": "چیزی را در این صفحه مخفی کنید",
+    "description": "دکمه مخفی کردن چیزی در صفحه کنونی داخل پاپ آپ"
   }
 }
