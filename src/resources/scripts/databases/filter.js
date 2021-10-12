@@ -42,7 +42,7 @@ export class FilterDatabase {
       await this.find_or_create(db, wildcard)
     })
 
-    return Promise.resolve({status: true})
+    return Promise.resolve(filters)
   }
 
   async get_filters() {
