@@ -4,7 +4,7 @@ const browser = require("webextension-polyfill");
 
 export class SettingsDatabase {
 
-  columns = "++id, key, value" // Databased indexed columns
+  columns = "++id, key, value" // Database indexed columns
   name    = "Settings"         // Database Name
   version = 1                  // Database Version
 
