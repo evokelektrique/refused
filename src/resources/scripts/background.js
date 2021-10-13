@@ -15,17 +15,8 @@ const tab_manager = new TabManager()
 // Initialize default settings
 new SettingsDatabase().set_settings()
 
-// On Install Handler
-function install_listener(details) {
-
-  // Detect if the extension is installed or updated
-  console.log(details)
-  if(details.reason === "install") {
-  } else {
-    browser.tabs.create({url: constants.base_url + "/update.html"})
-  }
-}
-browser.runtime.onInstalled.addListener(install_listener)
+// Handle install or updates
+browser.runtime.onInstalled.addListener(Refused.upgrade_listener)
 
 // Initialize Badge
 browser.browserAction.setBadgeBackgroundColor({
@@ -46,25 +37,34 @@ browser.runtime.onConnect.addListener(port => {
 })
 
 // Listener
-browser.runtime.onMessage.addListener( request => {
-  if(request === "toggle_status") {
-    new SettingsDatabase().open().then(async db => {
-      // Find status from settings database
-      const key        = "status"
-      const get        = await db.settings.get({ key: key })
-      const status     = get.value
-      const new_status = !status
-      await db.settings.update(get.id, {value: new_status})
+browser.runtime.onMessage.addListener(message => {
+  switch(message.type) {
+    case constants.hide_element:
+      break
 
-      // Toggle blocker
-      if(new_status) {
-        refused.start()
-      } else {
-        refused.stop()
-      }
+    case constants.toggle_status:
+      new SettingsDatabase().open().then(async db => {
+        // Find status from settings database
+        const key        = "status"
+        const get        = await db.settings.get({ key: key })
+        const status     = get.value
+        const new_status = !status
+        await db.settings.update(get.id, { value: new_status })
 
-      return Promise.resolve({ status: new_status })
-    })
+        // Toggle blocker
+        if(new_status) {
+          refused.start()
+        } else {
+          refused.stop()
+        }
+
+        return Promise.resolve({ status: new_status })
+      })
+      break
+
+    default:
+      console.log("Unknown message", message)
+      break
   }
 
   return true

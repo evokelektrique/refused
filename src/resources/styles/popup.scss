@@ -7,7 +7,6 @@ $wrapper_min_height: 393px;
 $text-color: #FFF;
 $primary-dark: #20222E;
 $secondary-dark: #BBB;
-// $target-color: #FF0000;
 
 $font-family: "Vazir";
 $font-size: 16px;
@@ -15,6 +14,12 @@ $font-size: 16px;
 $power-on-color: invert(100%) sepia(100%) saturate(0%) hue-rotate(238deg) brightness(101%) contrast(102%);
 $power-on-gradient: linear-gradient(#fec989 0%, #ffa45c 100%);
 $power-off-color: invert(0%) sepia(0%) saturate(0%) hue-rotate(72deg) brightness(102%) contrast(104%);
+
+$hide-button-border-color: #12141c;
+$hide-button-hover-border-color: #fdc786;
+$hide-button-background-color: #342e32;
+$hide-button-hover-background-color: #df9961;
+
 
 body {
   background: $primary-dark;
@@ -139,6 +144,25 @@ header {
 
       span {
         color: #ff8c84;
+      }
+    }
+
+    #hide_element {
+      width: 100%;
+      color: white;
+      background: $hide-button-background-color;
+      border: 1px solid $hide-button-border-color;
+      border-radius: 3px;
+      padding: 5px 0;
+      font-size: 14px;
+      font-family: $font-family;
+      font-weight: bold;
+      transition: all 0.1s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: $hide-button-hover-background-color;
+        border-color: $hide-button-hover-border-color;
       }
     }
   }

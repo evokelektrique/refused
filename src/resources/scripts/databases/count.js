@@ -101,7 +101,6 @@ export class CountDatabase {
    */
   async get_domain(domain) {
     const db    = await this.open()
-    console.log(domain)
     const value = db.domains.get({ domain: domain })
 
     return value

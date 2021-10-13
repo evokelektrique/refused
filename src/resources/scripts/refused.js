@@ -1,5 +1,7 @@
-const browser = require("webextension-polyfill");
 import { FilterDatabase } from "./databases/filter"
+import { constants } from "./constants"
+
+const browser = require("webextension-polyfill");
 
 export class Refused {
 
@@ -41,4 +43,21 @@ export class Refused {
   stop() {
     browser.webRequest.onBeforeRequest.removeListener(new this.blocker().listener)
   }
+
+  /**
+   * Handle extension updates or install
+   *
+   * @param  {object} details Contains reason and previous extension version
+   * @return {void}
+   */
+  static upgrade_listener(details) {
+    // On install
+    if(details.reason === "install") {}
+
+    // On update
+    if(details.reason === "update") {
+      browser.tabs.create({ url: constants.base_url + "/update.html" })
+    }
+  }
+
 }

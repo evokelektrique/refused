@@ -1,6 +1,7 @@
 import { SettingsDatabase } from './databases/settings'
 import { CountDatabase } from './databases/count'
 import { Helper } from './helper'
+import { constants } from "./constants"
 
 const browser = require("webextension-polyfill");
 
@@ -20,6 +21,11 @@ async function get_power_status(db) {
   return get.value
 }
 
+async function show_hide_element() {
+  const current_tab = await Helper.get_current_tab()
+  browser.tabs.sendMessage(current_tab.id, { type: constants.hide_element })
+}
+
 // Initialize Configuration & Display
 (async () => {
 
@@ -30,11 +36,18 @@ async function get_power_status(db) {
   const element_current_status       = document.getElementById("status")
   const element_block_information    = document.getElementById("block_information")
   const element_total_on_page_blocks = document.getElementById("total_on_page_blocks")
+  const element_hide_element         = document.getElementById("hide_element")
+  element_hide_element.addEventListener("click", async e => {
+    e.preventDefault()
+    await show_hide_element()
+  })
 
   // Translations
   const lang_status_on         = browser.i18n.getMessage("status_on")
   const lang_status_off        = browser.i18n.getMessage("status_off")
   const lang_url_not_supported = browser.i18n.getMessage("url_not_supported")
+  const lang_hide_element      = browser.i18n.getMessage("hide_element")
+  element_hide_element.innerText = lang_hide_element
 
   // Parse and setup current tab url
   const current_tab = await Helper.get_current_tab()
@@ -95,7 +108,7 @@ async function get_power_status(db) {
       element_current_status.innerHTML = lang_status_on
     }
     
-    const sender = await browser.runtime.sendMessage("toggle_status")
+    const sender = await browser.runtime.sendMessage({ type: constants.toggle_status })
   })
 
 })()

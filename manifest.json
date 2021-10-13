@@ -13,6 +13,16 @@
   "browser_action": {
     "default_popup": "popup.html"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": ["injects/watcher.js"],
+      "run_at": "document_end"
+    }
+  ],
   "options_ui": {
     "page": "options.html"
   },

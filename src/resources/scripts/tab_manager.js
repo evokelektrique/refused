@@ -20,7 +20,7 @@ export class TabManager {
    */
   constructor() {
     // Inject CSS/JS files into current tab
-    new Injector()
+    // new Injector()
 
     this.listener = new TabListener(this.on_active, this.on_error, this.on_domain).listener
     if(!this.has_on_activated_listener()) {
