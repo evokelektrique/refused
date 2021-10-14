@@ -10,9 +10,9 @@ const browser = require("webextension-polyfill");
 export class FilterDatabase {
 
   // Database
-  columns          = "++id, wildcard" // Database indexed columns
-  name             = "Filters"        // Database Name
-  version          = 1                // Database Version
+  columns = "++id, wildcard" // Database indexed columns
+  name    = "Filters"        // Database Name
+  version = 1                // Database Version
 
   /**
    * Initialize
@@ -79,7 +79,7 @@ export class FilterDatabase {
   }
 
   async get_filters_txt() {
-    const url      = constants.github_raw_base + constants.github_raw_data_path
+    const url      = constants.github_raw_base + constants.github_raw_filters_path
     const response = await fetch(url)
     const body     = await response.text()
 
