@@ -39,44 +39,46 @@ export class SelectorDatabase {
     const body = await this.get_selectors_txt()
     const selectors = this.parse_selectors(body)
 
-    selectors.forEach(async path => {
-      await this.find_or_create(db, path)
+    selectors.forEach(async selector => {
+      await this.find_or_create(db, selector)
     })
 
     return Promise.resolve(selectors)
   }
 
-  async get_selectors() {
-    const selectors = []
+  async get_selectors(domain) {
     const db = await this.open()
-    await db.selectors.each(filter => {
-      selectors.push(filter.path)
-    })
-    return selectors
+    const selectors = await db.selectors.filter(selector => {
+      if(selector.wildcard.indexOf(domain) !== -1) {
+        return selector
+      }
+    }).toArray()
+
+    return Promise.resolve(selectors)
   }
 
   /**
-   * Find or create filter based on path
+   * Find or create filter based on selector
    *
    * @param  {Dexie} db Dexie database instance
-   * @return {object}   Found or created path filter object
+   * @return {object}   Found or created selector filter object
    */
-  async find_or_create(db, path) {
+  async find_or_create(db, selector) {
 
-    // Determine weither the path is created or updated
+    // Determine weither the selector is created or updated
     let is_created = true
 
-    const object   = { path: path }
-    const get_path = await db.selectors.get({ path: path })
+    const object   = { path: selector.path, wildcard: selector.wildcard }
+    const get_selector = await db.selectors.get({ path: selector.path, wildcard: selector.wildcard })
 
-    // If path does not exists, return the current object
-    if(!get_path) {
+    // If selector does not exists, return the current object
+    if(!get_selector) {
       is_created = false
       await db.selectors.add(object)
-      return { path: object, is_created: is_created }
+      return { selector: object, is_created: is_created }
     }
 
-    return { path: get_path, is_created: is_created }
+    return { selector: get_selector, is_created: is_created }
   }
 
   async get_selectors_txt() {
@@ -88,10 +90,20 @@ export class SelectorDatabase {
   }
 
   parse_selectors(body) {
-    const lines = Helper.parse_txt(body)
-    console.log(lines)
+    const temp_lines = Helper.parse_txt(body)
+    const lines = []
+    const split_tag = " @ "
+
+    temp_lines.forEach(line => {
+      const splitted = line.split(split_tag)
+      lines.push({
+        path: splitted[0],
+        wildcard: splitted[1]
+      })
+    })
 
     return lines
   }
+
 
 }

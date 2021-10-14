@@ -1,7 +1,7 @@
 {
   "name": "Refused",
   "description": "Block ads on your favorite persian websites.",
-  "version": "0.4.5",
+  "version": "0.4.8",
   "manifest_version": 2,
   "icons": {
     "48": "images/48.png",
@@ -32,6 +32,7 @@
     "tabs",
     "storage",
     "unlimitedStorage",
+    "alarms",
     "<all_urls>"
   ],
   "default_locale": "en"

@@ -1,3 +1,4 @@
+import { SettingsDatabase } from "./databases/settings"
 import { FilterDatabase } from "./databases/filter"
 import { constants } from "./constants"
 
@@ -20,9 +21,9 @@ export class Refused {
    * Starts blocking the ads
    */
   async start() {
-
-    // Apply filters
     const filters = await new FilterDatabase().set_filters()
+
+    console.log('Filters', filters)
 
     if(!this.blocker) {
       throw new Error("Blocker is not set up")
@@ -57,6 +58,23 @@ export class Refused {
     // On update
     if(details.reason === "update") {
       browser.tabs.create({ url: constants.base_url + "/update.html" })
+    }
+  }
+
+  static async handle_alarms(alarm) {
+    console.log(alarm)
+    switch(alarm.name) {
+      case constants.alarm_selectors:
+        console.log("Selectors alarm")
+        break
+
+      case constants.alarm_filters:
+        console.log("Filters alarm")
+        break
+
+      default:
+        console.log("Unknown alarm")
+        break
     }
   }
 

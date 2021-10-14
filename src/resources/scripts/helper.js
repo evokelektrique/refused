@@ -7,8 +7,8 @@ export class Helper {
     const splited = body.split("\r\n").map(line => line.split("\n"))
 
     if(splited[0]) {
-      const lines = splited[0]
-      lines.forEach(line => {
+      const temp_lines = splited[0]
+      temp_lines.forEach(line => {
         if(line !== "" && !line.startsWith("!")) {
           lines.push(line)
         }

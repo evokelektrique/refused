@@ -164,6 +164,11 @@ header {
         background: $hide-button-hover-background-color;
         border-color: $hide-button-hover-border-color;
       }
+
+      &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
     }
   }
 }

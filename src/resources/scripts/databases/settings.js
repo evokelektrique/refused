@@ -13,7 +13,8 @@ export class SettingsDatabase {
     // Power on/off switch status
     status: true,
     total_blocks: 0,
-    last_filters_update: null
+    last_filters_update: null,
+    last_selectors_update: null
   }
 
   /**
@@ -45,9 +46,10 @@ export class SettingsDatabase {
     const db = await this.open()
 
     Object.entries(this.default_settings).forEach(async ([key, value]) => {
-      console.log(`Setting up "${key}"->(${value})`) // TODO: Remove
       await this.find_or_create(db, key, value)
     })
+
+    return Promise.resolve({ status: true })
   }
 
   /**
@@ -91,6 +93,32 @@ export class SettingsDatabase {
     const get = await db.settings.get({ key: key })
 
     await db.settings.update(get.id, { value: get.value + count })
+  }
+
+  async get_settings() {
+    const db = await this.open()
+
+    return {
+      db: db,
+      result: await db.settings.toArray()
+    }
+  }
+
+  /**
+   * Fetch a single option from database
+   *
+   * @param  {string} key Option key
+   * @return {object}     Result and current database object
+   */
+  async get(key) {
+    if(!key) {
+      return;
+    }
+
+    const db     = await this.open()
+    const result = await db.settings.get({ key: key })
+
+    return { result: result, db: db }
   }
 
 }
