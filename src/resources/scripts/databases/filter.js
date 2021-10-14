@@ -86,20 +86,10 @@ export class FilterDatabase {
     return body
   }
 
-  parse_filters(filters_body) {
-    const filters = []
-    const splited = filters_body.split("\r\n").map(line => line.split("\n"))
+  parse_filters(body) {
+    const lines = Helper.parse_txt(body)
 
-    if(splited[0]) {
-      const lines = splited[0]
-      lines.forEach(line => {
-        if(line !== "" && !line.startsWith("!")) {
-          filters.push(line)
-        }
-      })
-    }
-
-    return filters
+    return lines
   }
 
 }

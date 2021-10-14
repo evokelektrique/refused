@@ -1,5 +1,6 @@
 import { Dexie } from 'dexie'
 import { constants } from "../constants"
+import { Helper } from "../helper"
 
 const browser = require("webextension-polyfill");
 
@@ -10,7 +11,7 @@ const browser = require("webextension-polyfill");
 export class SelectorDatabase {
 
   // Database
-  columns = "++id, path" // Database indexed columns
+  columns = "++id, wildcard, path" // Database indexed columns
   name    = "Selectors"  // Database Name
   version = 1            // Database Version
 
@@ -86,20 +87,10 @@ export class SelectorDatabase {
     return body
   }
 
-  parse_selectors(selectors_body) {
-    const selectors = []
-    const splited = selectors_body.split("\r\n").map(line => line.split("\n"))
+  parse_selectors(body) {
+    const lines = Helper.parse_txt(body)
 
-    if(splited[0]) {
-      const lines = splited[0]
-      lines.forEach(line => {
-        if(line !== "" && !line.startsWith("!")) {
-          selectors.push(line)
-        }
-      })
-    }
-
-    return selectors
+    return lines
   }
 
 }

@@ -1,5 +1,3 @@
 ! This file contains a list of css selectors for hiding elements on page
 
-*://*.yektanet.com/*
-*://*.kaprila.com/*
-*://*.mediaad.org/*
+span#title @ *://*.refused.ir/*

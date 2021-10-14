@@ -1,6 +1,23 @@
 const browser = require("webextension-polyfill")
 
 export class Helper {
+
+  static parse_txt(body) {
+    const lines = []
+    const splited = body.split("\r\n").map(line => line.split("\n"))
+
+    if(splited[0]) {
+      const lines = splited[0]
+      lines.forEach(line => {
+        if(line !== "" && !line.startsWith("!")) {
+          lines.push(line)
+        }
+      })
+    }
+
+    return lines
+  }
+
   /**
    * Parse and validate given URL
    *

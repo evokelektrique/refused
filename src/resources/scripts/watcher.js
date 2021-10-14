@@ -54,6 +54,3 @@ browser.runtime.onMessage.addListener( message => {
 
   return false;
 })
-
-
-window.refused = RefusedWatcher
