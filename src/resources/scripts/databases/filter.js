@@ -1,5 +1,6 @@
 import { Dexie } from 'dexie'
 import { constants } from "../constants"
+import { Helper } from "../helper"
 
 const browser = require("webextension-polyfill");
 
