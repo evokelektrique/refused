@@ -19,7 +19,7 @@
         "http://*/*",
         "https://*/*"
       ],
-      "js": ["watcher.js"],
+      "js": ["injects/watcher.js"],
       "run_at": "document_end"
     }
   ],
