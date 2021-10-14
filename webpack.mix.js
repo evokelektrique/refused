@@ -19,4 +19,4 @@ mix.copy([
 ], "build/images")
 
 mix.copyDirectory("src/_locales", "build/_locales/")
-mix.js("src/resources/scripts/injects/watcher.js", "build/injects/watcher.js")
+mix.js("src/resources/scripts/watcher.js", "build/injects/watcher.js")

@@ -1,7 +1,6 @@
 import { Helper } from './helper'
 import { TabListener } from './tab_listener'
 import { CountDatabase } from './databases/count'
-import { Injector } from './injector'
 
 const browser = require("webextension-polyfill")
 
