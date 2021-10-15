@@ -60,8 +60,39 @@ const RefusedWatcher = {
     const current_url = window.location.href
     const parsed_url = Helper.parse_url(current_url)
     if(parsed_url.status) {
-      return await browser.runtime.sendMessage({ type: 'get_selectors', domain: parsed_url.domain })
+      return await browser.runtime.sendMessage({
+        type: constants.get_selectors,
+        domain: parsed_url.domain
+      })
     }
+  },
+
+  /**
+   * Get extension status
+   *
+   * @return {object} Status
+   */
+  async get_status() {
+    return await browser.runtime.sendMessage({ type: constants.get_status })
+  },
+
+  /**
+   * Hide elements on current page
+   *
+   * @param  {array} selectors List of css selectors
+   * @return {void}
+   */
+  hide_elements(selectors) {
+    if(!selectors) {
+      return;
+    }
+
+    selectors.forEach(selector => {
+      const elements = document.querySelectorAll(selector.path)
+      Array.from(elements).forEach(element => {
+        element.style.display = 'none'
+      })
+    })
   }
 
 }
@@ -70,17 +101,20 @@ const RefusedWatcher = {
 browser.runtime.onMessage.addListener(message => {
   if(message.type === constants.hide_element) {
     const data = {}
-    browser.runtime.sendMessage({ type: constants.hide_element, data: data })
+    browser.runtime.sendMessage({
+      type: constants.hide_element,
+      data: data
+    })
   }
 
-  return false;
-})
+  return false
+});
 
-RefusedWatcher.get_selectors().then(selectors => {
-  selectors.forEach(selector => {
-    const elements = document.querySelectorAll(selector.path)
-    Array.from(elements).forEach(element => {
-      element.style.display = 'none'
-    })
-  })
+RefusedWatcher.get_status().then(async response => {
+  const status = response.status
+
+  if(status) {
+    const selectors = await RefusedWatcher.get_selectors()
+    RefusedWatcher.hide_elements(selectors)
+  }
 })

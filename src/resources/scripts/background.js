@@ -44,34 +44,39 @@ browser.runtime.onConnect.addListener(port => {
 
 // Listener
 browser.runtime.onMessage.addListener(async message => {
+  let result
+
   switch(message.type) {
-    case 'get_selectors':
+    case constants.get_selectors:
       return await new SelectorDatabase().get_selectors(message.domain)
       break
 
     case constants.hide_element:
-      console.log('hide element')
       break
 
     case constants.toggle_status:
-      console.log('toggle status')
-      new SettingsDatabase().open().then(async db => {
-        // Find status from settings database
-        const key        = "status"
-        const get        = await db.settings.get({ key: key })
-        const status     = get.value
-        const new_status = !status
-        await db.settings.update(get.id, { value: new_status })
+      // Get status
+      result = await Helper.get_extension_status()
 
-        // Toggle blocker
-        if(new_status) {
-          refused.start()
-        } else {
-          refused.stop()
-        }
+      // Update status
+      const db = await new SettingsDatabase().open()
+      await db.settings.update(result.id, { value: !result.status })
 
-        return Promise.resolve({ status: new_status })
-      })
+      // Toggle blocker
+      if(!result.status) {
+        refused.start()
+      } else {
+        refused.stop()
+      }
+
+      return Promise.resolve({ status: !result.status })
+      break
+
+    case constants.get_status:
+      // Get status
+      result = await Helper.get_extension_status()
+
+      return Promise.resolve(result)
       break
 
     default:

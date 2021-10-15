@@ -52,7 +52,9 @@ export class Refused {
    */
   static upgrade_listener(details) {
     // On install
-    if(details.reason === "install") {}
+    if(details.reason === "install") {
+      browser.tabs.create({ url: constants.base_url + "/install.html" })
+    }
 
     // On update
     if(details.reason === "update") {
@@ -60,6 +62,11 @@ export class Refused {
     }
   }
 
+  /**
+   * Handle browser alarms
+   *
+   * @param  {object} alarm AlarmInfo
+   */
   static async handle_alarms(alarm) {
     const db = await new SettingsDatabase().open()
 
@@ -98,7 +105,12 @@ export class Refused {
     }
   }
 
-  // Update filters database
+  /**
+   * Update filters database
+   *
+   * @param  {object} db Dexie database instance
+   * @return {object}    Update status and information about time
+   */
   static async check_filters_update(db) {
     let update_status = false
 
@@ -133,7 +145,12 @@ export class Refused {
     })
   }
 
-  // Update selectors database
+  /**
+   * Update selectors database
+   *
+   * @param  {object} db Dexie database instance
+   * @return {object}    Update status and information about time
+   */
   static async check_selectors_update(db) {
     let update_status = false
 

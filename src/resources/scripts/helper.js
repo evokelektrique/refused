@@ -1,7 +1,18 @@
+import { SettingsDatabase } from "./databases/settings"
+
 const browser = require("webextension-polyfill")
 
+/**
+ * Base helpers class
+ */
 export class Helper {
 
+  /**
+   * Read lines from given texts
+   *
+   * @param  {steing} body String body to parse
+   * @return {array}       List of parsed lines
+   */
   static parse_txt(body) {
     const lines = []
     const splited = body.split("\r\n").map(line => line.split("\n"))
@@ -68,8 +79,32 @@ export class Helper {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  /**
+   * Fetch current tab
+   *
+   * @return {object} Current tab information
+   */
   static async get_current_tab() {
-    return await browser.tabs.query({currentWindow: true, active: true}).then(tab => tab[0])
+    return await browser.tabs.query({
+      currentWindow: true, active: true
+    }).then(tab => tab[0])
+  }
+
+  /**
+   * Find status from settings database
+   *
+   * @return {object} current extension status and its row ID
+   */
+  static async get_extension_status() {
+    // Get status
+    const db     = await new SettingsDatabase().open()
+    const key    = "status"
+    const get    = await db.settings.get({ key: key })
+    const status = get.value
+
+    return Promise.resolve({
+      status: status, id: get.id
+    })
   }
 
 }

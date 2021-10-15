@@ -11,5 +11,7 @@ exports.constants = {
 
   // Messages
   toggle_status: "TOGGLE_STATUS",
-  hide_element: "HIDE_ELEMENT"
+  hide_element: "HIDE_ELEMENT",
+  get_selectors: "GET_SELECTORS",
+  get_status: "GET_STATUS"
 }
