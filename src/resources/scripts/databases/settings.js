@@ -14,7 +14,9 @@ export class SettingsDatabase {
     status: true,
     total_blocks: 0,
     last_filters_update: null,
-    last_selectors_update: null
+    next_filters_update: null,
+    last_selectors_update: null,
+    next_selectors_update: null
   }
 
   /**
