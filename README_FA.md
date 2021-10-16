@@ -15,6 +15,11 @@
     <a href="https://addons.mozilla.org/en-US/firefox/addon/refused/" title="Download for Firefox">Firefox</a>
     &nbsp;-&nbsp;  
     <a href="https://github.com/evokelektrique/refused/issues">گزارش باگ</a>
+    <br />
+    <br />
+    Translations:
+    <a href="https://github.com/evokelektrique/refused/blob/master/README.md">EN</a>
+    <b>FA</b>
   </p>
 </p>
 
