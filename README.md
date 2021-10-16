@@ -25,6 +25,7 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#features">Features</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -37,6 +38,16 @@
   </ol>
 </details>
 
+<!-- FEATURES -->
+## Features
+
+  - [X] Block requests
+  - [X] Hide elements
+  - [X] Support wildcards
+  - [X] Support XPATH
+  - [ ] Support Opera browser
+  - [ ] Suppoer Microsoft Edge Browser
+  - [ ] Save and hide elements from popup in local database
 
 <!-- GETTING STARTED -->
 ## Getting Started
