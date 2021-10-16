@@ -17,9 +17,9 @@
     <a href="https://github.com/evokelektrique/refused/issues">گزارش باگ</a>
     <br />
     <br />
-    Translations:
     <a href="https://github.com/evokelektrique/refused/blob/master/README.md">EN</a>
     <b>FA</b>
+    :ترجمه ها
   </p>
 </p>
 
