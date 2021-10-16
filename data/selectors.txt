@@ -1,3 +1,8 @@
 ! This file contains a list of css selectors for hiding elements on page
-
+!
+! Example usage:
+! CSS_SELECTOR @ WILDCARD
+!
 ! span#title @ *://*.refused.ir/*
+
+#logo_____wrap > div > div @ *://*.soft98.ir/*
