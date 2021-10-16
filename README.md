@@ -34,6 +34,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+        <li><a href="#reports">Reports</a></li>
         <li><a href="#requirments">Requirments</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
@@ -58,6 +59,16 @@
 ## Getting Started
 
 In this section, explanations are written in the following cases.
+
+### Reports
+
+<div style="display:flex">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_data_usage_en.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_requests_en.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_seconds_en.png?raw=true" width="300">
+</div>
+
+*Click to enlarge images*
 
 ### Requirments
 - Firefox & Firefox Android >= 48
