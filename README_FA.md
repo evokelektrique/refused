@@ -34,6 +34,7 @@
     <li>
       <a href="#getting-started">مقدمات</a>
       <ul>
+        <li><a href="#reports">گزارش ها</a></li>
         <li><a href="#requirments">نیازمندی ها</a></li>
         <li><a href="#installation">نصب</a></li>
       </ul>
@@ -58,6 +59,16 @@
 ## Getting Started
 
 در این قسمت توضیحاتی در موارد زیر نوشته شده است.
+
+### Reports
+
+<div style="display:flex">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_data_usage_fa.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_requests_fa.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_seconds_fa.png?raw=true" width="300">
+</div>
+
+*برای بزرگنمایی تصاویر کلیک کنید*
 
 ### Requirments
 - Firefox & Firefox Android >= 48
