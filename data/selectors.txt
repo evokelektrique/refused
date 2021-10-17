@@ -4,5 +4,3 @@
 ! CSS_SELECTOR @ WILDCARD
 !
 ! span#title @ *://*.refused.ir/*
-
-#logo_____wrap > div > div @ *://*.soft98.ir/*
