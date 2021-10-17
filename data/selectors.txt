@@ -4,3 +4,5 @@
 ! CSS_SELECTOR @ WILDCARD
 !
 ! span#title @ *://*.refused.ir/*
+
+#list1 @ *://*.aparat.com/*
