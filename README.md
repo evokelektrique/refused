@@ -1,4 +1,4 @@
-<br />
+﻿<br />
 <p align="center">
   <a href="https://github.com/evokelektrique/refused">
     <img src="./src/resources/images/96.png?raw=true" alt="Logo" width="96" height="96">
@@ -63,9 +63,9 @@ In this section, explanations are written in the following cases.
 ### Reports
 
 <div style="display:flex">
-  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_data_usage_en.png?raw=true" width="300">
-  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_requests_en.png?raw=true" width="300">
-  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_seconds_en.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/images/charts/chart_data_usage_en.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/images/charts/chart_requests_en.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/images/charts/chart_seconds_en.png?raw=true" width="300">
 </div>
 
 *Click to enlarge images*

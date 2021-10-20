@@ -1,4 +1,4 @@
-<br />
+﻿<br />
 <p align="center">
   <a href="https://github.com/evokelektrique/refused">
     <img src="./src/resources/images/96.png?raw=true" alt="Logo" width="96" height="96">
@@ -63,9 +63,9 @@
 ### Reports
 
 <div style="display:flex">
-  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_data_usage_fa.png?raw=true" width="300">
-  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_requests_fa.png?raw=true" width="300">
-  <img src="https://github.com/evokelektrique/refused/blob/master/data/charts/chart_seconds_fa.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/images/charts/chart_data_usage_fa.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/images/charts/chart_requests_fa.png?raw=true" width="300">
+  <img src="https://github.com/evokelektrique/refused/blob/master/data/images/charts/chart_seconds_fa.png?raw=true" width="300">
 </div>
 
 *برای بزرگنمایی تصاویر کلیک کنید*
