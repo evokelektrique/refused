@@ -49,9 +49,9 @@
 
   - [X] Block requests
   - [X] Hide elements
-  - [X] Support wildcards
-  - [X] Support XPATH
-  - [ ] Support Opera browser
+  - [X] Support Wildcards
+  - [X] Support CSS Selectors
+  - [ ] Support Opera Browser
   - [ ] Suppoer Microsoft Edge Browser
   - [ ] Save and hide elements from popup in local database
 
@@ -70,7 +70,7 @@ In this section, explanations are written in the following cases.
 
 *Click to enlarge images*
 
-### Requirments
+### Requirements
 - Firefox & Firefox Android >= 48
 - NodeJS (Only for testing and building from source code)
 
