@@ -1,8 +1,9 @@
 ! This file contains a list of css selectors for hiding elements on page
 !
-! Example usage:
+! Example:
 ! CSS_SELECTOR @ WILDCARD
-!
-! span#title @ *://*.refused.ir/*
 
 #list1 @ *://*.aparat.com/*
+body > div.bodyWrapper > section.item-grid-row > div > section @ *://*.zoomit.ir/*
+.banner-wrapper @ *://*.zoomit.ir/*
+.bannercontainer @ *://*.zoomit.ir/*
