@@ -1,4 +1,4 @@
-﻿<br />
+<br />
 <p align="center">
   <a href="https://github.com/evokelektrique/refused">
     <img src="./src/resources/images/96.png?raw=true" alt="Logo" width="96" height="96">
@@ -22,6 +22,10 @@
     <a href="https://github.com/evokelektrique/refused/blob/master/README_FA.md">FA</a>
   </p>
 </p>
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/evokelektrique/refused?color=gr&label=release&style=for-the-badge)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/users/omeglkgaklnjheplmjmmcgodhcnjckdf?color=blue&label=Chrome%20users&logo=Google%20Chrome&logoColor=white&style=for-the-badge)
+![Mozilla Add-on](https://img.shields.io/amo/users/refused?color=orange&label=Firefox%20users&logo=firefox&logoColor=white&style=for-the-badge)
 
 <br />
 <br />
