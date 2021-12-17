@@ -76,7 +76,7 @@
   - [ ] Suppoer Microsoft Edge Browser
   - [ ] Save and hide elements from popup in local database
 
-### Statistics
+## Statistics
 
 *Click to enlarge images*
 
@@ -86,12 +86,12 @@
   <img src="https://github.com/evokelektrique/refused/blob/master/data/images/charts/chart_seconds_en.png?raw=true" width="256">
 </div>
 
-### Requirements
+## Requirements
 
 - Firefox & Firefox Android >= 48
 - NodeJS (Only for testing and building from source code)
 
-### Build
+## Build
 
 A step by step installtion from soruce code:
 
