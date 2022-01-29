@@ -7,15 +7,7 @@
 *://*.utop.ir/*
 
 ! Zoomit.ir ads
-*://*.zoomit.ir/2021/8/banner-launch-samsung-unpacked-970x250.gif
-*://*.zoomit.ir/2021/7/canvio-advance-300x250.gif
-*://*.zoomit.ir/2021/10/banner-huwaeix-1300x100.gif
-*://*.zoomit.ir/2021/10/banner-coinnikp-300x250.gif
-*://*.zoomit.ir/2021/9/banner-rightel-s-250x250.gif
-*://*.zoomit.ir/2021/9/banner-f8plus-glx-300x250.jpg
-*://*.zoomit.ir/2021/10/banner-tscopowerbank-300x250.gif
-*://*.zoomg.ir/2021/10/banner-vs-300x500.gif
-*://*.zoomit.ir/2021/8/banner-abrarvan-student-250x500.gif
+*://*.zoomit.ir/*/*/banner-*.gif
 *://uploadboy.com/banner/*.png
 *://uploadboy.com/images/asiatech300-100.gif
 *://yun.ir/upload/guests/2022/01/3151/original.jpg
