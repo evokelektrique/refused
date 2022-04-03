@@ -6,6 +6,7 @@ exports.constants = {
   github_raw_selectors_path: "data/selectors.txt",
 
   // Alarms
+  alarm_options: { periodInMinutes: 1 },
   alarm_filters: "check_filters_update",
   alarm_selectors: "check_selectors_update",
 

@@ -105,5 +105,4 @@ export class SelectorDatabase {
     return lines
   }
 
-
 }
